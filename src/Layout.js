@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   DesktopOutlined,
   FileOutlined,
@@ -12,6 +12,7 @@ import { Breadcrumb, Layout, Menu, theme } from "antd";
 
 const AppLayout = ({ children }) => {
   const navigateTo = useNavigate();
+  const location = useLocation();
 
   /** helper functions */
   const getItem = (label, icon, key) => {
@@ -43,6 +44,31 @@ const AppLayout = ({ children }) => {
 
   /** render functions */
   const renderBreadcrumbs = () => {
+    const currentRoute = location.pathname;
+    let breadCrumb = "Dashboard";
+    switch (currentRoute) {
+      case "/":
+        breadCrumb = "Dashboard";
+        break;
+      case "/plots":
+        breadCrumb = "Plots";
+        break;
+      case "/user-details":
+        breadCrumb = "User Profile";
+        break;
+      case "/users":
+        breadCrumb = "All Users Data";
+        break;
+      case "/stats":
+        breadCrumb = "Stats";
+        break;
+      case "plot-enquiry":
+        breadCrumb = "Enquiry";
+        break;
+      default:
+        breadCrumb = "Dashboard";
+        break;
+    }
     return (
       <Breadcrumb
         style={{
@@ -50,7 +76,7 @@ const AppLayout = ({ children }) => {
         }}
       >
         <Breadcrumb.Item>Plots Management</Breadcrumb.Item>
-        <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
+        <Breadcrumb.Item>{breadCrumb}</Breadcrumb.Item>
       </Breadcrumb>
     );
   };
