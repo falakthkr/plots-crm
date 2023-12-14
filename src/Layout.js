@@ -12,7 +12,7 @@ import { Breadcrumb, Layout, Menu, theme } from "antd";
 
 const AppLayout = ({ children }) => {
   const navigateTo = useNavigate();
-  
+
   /** helper functions */
   const getItem = (label, icon, key) => {
     return {
@@ -59,14 +59,19 @@ const AppLayout = ({ children }) => {
       <Sider
         style={{
           overflow: "auto",
-          height: "100vh",
           position: "fixed",
           left: 0,
           top: 0,
+          height: "100vh",
           bottom: 0,
         }}
       >
-        <div className="demo-logo-vertical" />
+        <img
+          src="https://walidevelopers.com/pmswali/header.jpg"
+          width={180}
+          style={{ margin: "10px" }}
+          alt="wali developers logo"
+        />
         <Menu
           theme="dark"
           defaultSelectedKeys={["/"]}
@@ -105,7 +110,7 @@ const AppLayout = ({ children }) => {
           textAlign: "center",
         }}
       >
-        Wali Developers ©2023 Created by Falak Thackar
+        Wali Developers Plot Management System ©2023 Created by Falak Thackar
       </Footer>
     );
   };
