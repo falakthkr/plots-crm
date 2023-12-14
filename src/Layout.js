@@ -6,7 +6,8 @@ import {
   BarChartOutlined,
   TeamOutlined,
   UserOutlined,
-  LayoutOutlined,
+  AppstoreOutlined,
+  HomeOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 
@@ -32,10 +33,11 @@ const AppLayout = ({ children }) => {
 
   const items = [
     getItem("Dashboard", <DesktopOutlined />, "/"),
-    getItem("Stats", <BarChartOutlined />, "/stats"),
     getItem("Users", <TeamOutlined />, "/users"),
-    getItem("Plots", <LayoutOutlined />, "/plots"),
+    getItem("Plots", <AppstoreOutlined />, "/plots"),
+    getItem("Projects", <HomeOutlined />, "/projects"),
     getItem("Enquiry", <FileOutlined />, "/plot-enquiry"),
+    getItem("Stats", <BarChartOutlined />, "/stats"),
     getItem("Profile", <UserOutlined />, "/user-details"),
   ];
   const {
@@ -62,8 +64,11 @@ const AppLayout = ({ children }) => {
       case "/stats":
         breadCrumb = "Stats";
         break;
-      case "plot-enquiry":
+      case "/plot-enquiry":
         breadCrumb = "Enquiry";
+        break;
+      case "/projects":
+        breadCrumb = "Projects";
         break;
       default:
         breadCrumb = "Dashboard";

@@ -7,6 +7,7 @@ import UserProfile from "../pages/UserProfile";
 import AllUsers from "../pages/AllUsers";
 import Stats from "../pages/Stats";
 import Enquiry from "../pages/Enquiry";
+import Projects from "../pages/Projects";
 
 const PublicRoutes = () => {
   /** render functions */
@@ -20,6 +21,7 @@ const PublicRoutes = () => {
             <Route path="/user-details" Component={UserProfile} />
             <Route path="/users" Component={AllUsers} />
             <Route path="/stats" Component={Stats} />
+            <Route path="/projects" Component={Projects} />
             <Route path="/plot-enquiry" Component={Enquiry} />
           </Routes>
         </AppLayout>
