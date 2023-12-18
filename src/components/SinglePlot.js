@@ -8,10 +8,11 @@ const SinglePlot = ({
   typeThree,
   typeFour,
   garden,
+  status,
 }) => {
   const plotStyling = useRef({
-    width: "50px",
-    height: "50px",
+    width: "62px",
+    height: "45px",
   });
   /** states */
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,13 +22,15 @@ const SinglePlot = ({
   useEffect(() => {
     if (typeOne) {
       plotStyling.current = {
-        width: "50px",
-        height: "50px",
+        ...plotStyling.current,
+        width: "62px",
+        height: "45px",
       };
       setPingCount((prev) => prev + 1);
     }
     if (typeTwo) {
       plotStyling.current = {
+        ...plotStyling.current,
         width: "50px",
         height: "50px",
       };
@@ -35,6 +38,7 @@ const SinglePlot = ({
     }
     if (typeThree) {
       plotStyling.current = {
+        ...plotStyling.current,
         width: "50px",
         height: "50px",
       };
@@ -42,6 +46,7 @@ const SinglePlot = ({
     }
     if (typeFour) {
       plotStyling.current = {
+        ...plotStyling.current,
         width: "50px",
         height: "50px",
       };
@@ -49,8 +54,10 @@ const SinglePlot = ({
     }
     if (garden) {
       plotStyling.current = {
-        width: "600px",
-        height: "550px",
+        ...plotStyling.current,
+        width: "500px",
+        height: "495px",
+        fontSize: "large",
       };
       setPingCount((prev) => prev + 1);
     }
@@ -58,7 +65,9 @@ const SinglePlot = ({
 
   /** helper functions */
   const showModal = () => {
-    setIsModalOpen(true);
+    if (status !== "booked") {
+      setIsModalOpen(true);
+    }
   };
   const handleOk = () => {
     setIsModalOpen(false);
@@ -74,6 +83,7 @@ const SinglePlot = ({
       <>
         <p>Plot ID: {value}</p>
         <p>Plot Size: 1200</p>
+        <p>Status: {status ? status : "Open for Sale"}</p>
       </>
     );
   };
@@ -83,6 +93,7 @@ const SinglePlot = ({
       <>
         <p>Plot ID: {value}</p>
         <p>Plot Size: 2400</p>
+        <p>Status: {status ? status : "Open for Sale"}</p>
       </>
     );
   };
@@ -92,6 +103,7 @@ const SinglePlot = ({
       <>
         <p>Plot ID: {value}</p>
         <p>Plot Size: 12x24m</p>
+        <p>Status: {status ? status : "Open for Sale"}</p>
       </>
     );
   };
@@ -101,12 +113,18 @@ const SinglePlot = ({
       <>
         <p>Plot ID: {value}</p>
         <p>Plot Size: 12x21m</p>
+        <p>Status: {status ? status : "Open for Sale"}</p>
       </>
     );
   };
   return (
     <>
-      <Button disabled={garden} style={plotStyling.current} onClick={showModal}>
+      <Button
+        danger={status === "booked"}
+        disabled={garden || status === "pending"}
+        style={plotStyling.current}
+        onClick={showModal}
+      >
         {garden ? "Open Space/Garden" : value}
       </Button>
       <Modal

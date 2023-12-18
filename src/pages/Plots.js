@@ -13,7 +13,7 @@ const Plots = () => {
     <div className="PlotsWrapper">
       <Flex gap="large">
         <Flex vertical>
-          <SinglePlot value={1} typeOne />
+          <SinglePlot status="booked" value={1} typeOne />
           <SinglePlot value={2} typeOne />
           <SinglePlot value={3} typeOne />
           <SinglePlot value={4} typeOne />
@@ -23,11 +23,11 @@ const Plots = () => {
           <SinglePlot value={8} typeOne />
           <SinglePlot value={9} typeOne />
           <SinglePlot value={10} typeOne />
-          <SinglePlot value={11} typeOne />
+          <SinglePlot status="booked" value={11} typeOne />
         </Flex>
         <Flex>
           <Flex vertical>
-            <SinglePlot value={22} typeOne />
+            <SinglePlot status="booked" value={22} typeOne />
             <SinglePlot value={21} typeOne />
             <SinglePlot value={20} typeOne />
             <SinglePlot value={19} typeOne />
@@ -37,10 +37,10 @@ const Plots = () => {
             <SinglePlot value={15} typeOne />
             <SinglePlot value={14} typeOne />
             <SinglePlot value={13} typeOne />
-            <SinglePlot value={12} typeOne />
+            <SinglePlot status="booked" value={12} typeOne />
           </Flex>
           <Flex vertical>
-            <SinglePlot value={23} typeOne />
+            <SinglePlot status="booked" value={23} typeOne />
             <SinglePlot value={24} typeOne />
             <SinglePlot value={25} typeOne />
             <SinglePlot value={26} typeOne />
@@ -50,12 +50,12 @@ const Plots = () => {
             <SinglePlot value={30} typeOne />
             <SinglePlot value={31} typeOne />
             <SinglePlot value={32} typeOne />
-            <SinglePlot value={33} typeOne />
+            <SinglePlot status="booked" value={33} typeOne />
           </Flex>
         </Flex>
         <Flex>
           <Flex vertical>
-            <SinglePlot value={44} typeOne />
+            <SinglePlot status="booked" value={44} typeOne />
             <SinglePlot value={43} typeOne />
             <SinglePlot value={42} typeOne />
             <SinglePlot value={41} typeOne />
@@ -65,10 +65,10 @@ const Plots = () => {
             <SinglePlot value={37} typeOne />
             <SinglePlot value={36} typeOne />
             <SinglePlot value={35} typeOne />
-            <SinglePlot value={34} typeOne />
+            <SinglePlot status="booked" value={34} typeOne />
           </Flex>
           <Flex vertical>
-            <SinglePlot value={45} typeOne />
+            <SinglePlot status="booked" value={45} typeOne />
             <SinglePlot value={46} typeOne />
             <SinglePlot value={47} typeOne />
             <SinglePlot value={48} typeOne />
@@ -78,12 +78,12 @@ const Plots = () => {
             <SinglePlot value={52} typeOne />
             <SinglePlot value={53} typeOne />
             <SinglePlot value={54} typeOne />
-            <SinglePlot value={55} typeOne />
+            <SinglePlot status="booked" value={55} typeOne />
           </Flex>
         </Flex>
         <Flex>
           <Flex vertical>
-            <SinglePlot value={66} typeOne />
+            <SinglePlot status="booked" value={66} typeOne />
             <SinglePlot value={65} typeOne />
             <SinglePlot value={64} typeOne />
             <SinglePlot value={63} typeOne />
@@ -93,10 +93,10 @@ const Plots = () => {
             <SinglePlot value={59} typeOne />
             <SinglePlot value={58} typeOne />
             <SinglePlot value={57} typeOne />
-            <SinglePlot value={56} typeOne />
+            <SinglePlot status="booked" value={56} typeOne />
           </Flex>
           <Flex vertical>
-            <SinglePlot value={67} typeOne />
+            <SinglePlot status="booked" value={67} typeOne />
             <SinglePlot value={68} typeOne />
             <SinglePlot value={69} typeOne />
             <SinglePlot value={70} typeOne />
@@ -106,12 +106,12 @@ const Plots = () => {
             <SinglePlot value={74} typeOne />
             <SinglePlot value={75} typeOne />
             <SinglePlot value={76} typeOne />
-            <SinglePlot value={77} typeOne />
+            <SinglePlot status="booked" value={77} typeOne />
           </Flex>
         </Flex>
         <Flex>
           <Flex vertical>
-            <SinglePlot value={88} typeOne />
+            <SinglePlot status="booked" value={88} typeOne />
             <SinglePlot value={87} typeOne />
             <SinglePlot value={86} typeOne />
             <SinglePlot value={85} typeOne />
@@ -121,10 +121,10 @@ const Plots = () => {
             <SinglePlot value={81} typeOne />
             <SinglePlot value={80} typeOne />
             <SinglePlot value={79} typeOne />
-            <SinglePlot value={78} typeOne />
+            <SinglePlot status="booked" value={78} typeOne />
           </Flex>
           <Flex vertical>
-            <SinglePlot value={89} typeOne />
+            <SinglePlot status="booked" value={89} typeOne />
             <SinglePlot value={90} typeOne />
             <SinglePlot value={91} typeOne />
             <SinglePlot value={92} typeOne />
@@ -134,12 +134,12 @@ const Plots = () => {
             <SinglePlot value={96} typeOne />
             <SinglePlot value={97} typeOne />
             <SinglePlot value={98} typeOne />
-            <SinglePlot value={99} typeOne />
+            <SinglePlot status="booked" value={99} typeOne />
           </Flex>
         </Flex>
         <Flex>
           <Flex vertical>
-            <SinglePlot value={110} typeOne />
+            <SinglePlot status="booked" value={110} typeOne />
             <SinglePlot value={109} typeOne />
             <SinglePlot value={108} typeOne />
             <SinglePlot value={107} typeOne />
@@ -149,10 +149,10 @@ const Plots = () => {
             <SinglePlot value={103} typeOne />
             <SinglePlot value={102} typeOne />
             <SinglePlot value={101} typeOne />
-            <SinglePlot value={100} typeOne />
+            <SinglePlot status="booked" value={100} typeOne />
           </Flex>
           <Flex vertical>
-            <SinglePlot value={111} typeOne />
+            <SinglePlot status="booked" value={111} typeOne />
             <SinglePlot value={112} typeOne />
             <SinglePlot value={113} typeOne />
             <SinglePlot value={114} typeOne />
@@ -162,12 +162,12 @@ const Plots = () => {
             <SinglePlot value={118} typeOne />
             <SinglePlot value={119} typeOne />
             <SinglePlot value={120} typeOne />
-            <SinglePlot value={121} typeOne />
+            <SinglePlot status="booked" value={121} typeOne />
           </Flex>
         </Flex>
         <Flex>
           <Flex vertical>
-            <SinglePlot value={132} typeOne />
+            <SinglePlot status="booked" value={132} typeOne />
             <SinglePlot value={131} typeOne />
             <SinglePlot value={130} typeOne />
             <SinglePlot value={129} typeOne />
@@ -177,10 +177,10 @@ const Plots = () => {
             <SinglePlot value={125} typeOne />
             <SinglePlot value={124} typeOne />
             <SinglePlot value={123} typeOne />
-            <SinglePlot value={122} typeOne />
+            <SinglePlot status="booked" value={122} typeOne />
           </Flex>
           <Flex vertical>
-            <SinglePlot value={133} typeOne />
+            <SinglePlot status="booked" value={133} typeOne />
             <SinglePlot value={134} typeOne />
             <SinglePlot value={135} typeOne />
             <SinglePlot value={136} typeOne />
@@ -190,12 +190,12 @@ const Plots = () => {
             <SinglePlot value={140} typeOne />
             <SinglePlot value={141} typeOne />
             <SinglePlot value={142} typeOne />
-            <SinglePlot value={143} typeOne />
+            <SinglePlot status="booked" value={143} typeOne />
           </Flex>
         </Flex>
         <Flex>
           <Flex vertical>
-            <SinglePlot value={154} typeOne />
+            <SinglePlot status="booked" value={154} typeOne />
             <SinglePlot value={153} typeOne />
             <SinglePlot value={152} typeOne />
             <SinglePlot value={151} typeOne />
@@ -205,10 +205,10 @@ const Plots = () => {
             <SinglePlot value={147} typeOne />
             <SinglePlot value={146} typeOne />
             <SinglePlot value={145} typeOne />
-            <SinglePlot value={144} typeOne />
+            <SinglePlot status="booked" value={144} typeOne />
           </Flex>
           <Flex vertical>
-            <SinglePlot value={155} typeOne />
+            <SinglePlot status="booked" value={155} typeOne />
             <SinglePlot value={156} typeOne />
             <SinglePlot value={157} typeOne />
             <SinglePlot value={158} typeOne />
@@ -218,12 +218,12 @@ const Plots = () => {
             <SinglePlot value={162} typeOne />
             <SinglePlot value={163} typeOne />
             <SinglePlot value={164} typeOne />
-            <SinglePlot value={165} typeOne />
+            <SinglePlot status="booked" value={165} typeOne />
           </Flex>
         </Flex>
         <Flex>
           <Flex vertical>
-            <SinglePlot value={176} typeOne />
+            <SinglePlot status="booked" value={176} typeOne />
             <SinglePlot value={175} typeOne />
             <SinglePlot value={174} typeOne />
             <SinglePlot value={173} typeOne />
@@ -233,10 +233,10 @@ const Plots = () => {
             <SinglePlot value={169} typeOne />
             <SinglePlot value={168} typeOne />
             <SinglePlot value={167} typeOne />
-            <SinglePlot value={166} typeOne />
+            <SinglePlot status="booked" value={166} typeOne />
           </Flex>
           <Flex vertical>
-            <SinglePlot value={177} typeOne />
+            <SinglePlot status="booked" value={177} typeOne />
             <SinglePlot value={178} typeOne />
             <SinglePlot value={179} typeOne />
             <SinglePlot value={180} typeOne />
@@ -246,11 +246,11 @@ const Plots = () => {
             <SinglePlot value={184} typeOne />
             <SinglePlot value={185} typeOne />
             <SinglePlot value={186} typeOne />
-            <SinglePlot value={187} typeOne />
+            <SinglePlot status="booked" value={187} typeOne />
           </Flex>
         </Flex>
       </Flex>
-      <Divider>9th main road</Divider>
+      <Divider>9m road</Divider>
       <Flex gap="large">
         <Flex vertical>
           <SinglePlot value={297} typeOne />
@@ -309,7 +309,92 @@ const Plots = () => {
           </Flex>
           <SinglePlot value={null} garden />
         </Flex>
+        <Flex>
+          <Flex vertical>
+            <SinglePlot value={253} typeOne />
+            <SinglePlot value={252} typeOne />
+            <SinglePlot value={251} typeOne />
+            <SinglePlot value={251} typeOne />
+            <SinglePlot value={249} typeOne />
+            <SinglePlot value={248} typeOne />
+            <SinglePlot value={247} typeOne />
+            <SinglePlot value={246} typeOne />
+            <SinglePlot value={245} typeOne />
+            <SinglePlot value={244} typeOne />
+            <SinglePlot value={243} typeOne />
+          </Flex>
+          <Flex vertical>
+            <SinglePlot value={232} typeOne />
+            <SinglePlot value={233} typeOne />
+            <SinglePlot value={234} typeOne />
+            <SinglePlot value={235} typeOne />
+            <SinglePlot value={236} typeOne />
+            <SinglePlot value={237} typeOne />
+            <SinglePlot value={238} typeOne />
+            <SinglePlot value={239} typeOne />
+            <SinglePlot value={240} typeOne />
+            <SinglePlot value={241} typeOne />
+            <SinglePlot value={242} typeOne />
+          </Flex>
+        </Flex>
+        <Flex>
+          <Flex vertical>
+            <SinglePlot value={231} typeOne />
+            <SinglePlot value={230} typeOne />
+            <SinglePlot value={229} typeOne />
+            <SinglePlot value={228} typeOne />
+            <SinglePlot value={227} typeOne />
+            <SinglePlot value={226} typeOne />
+            <SinglePlot value={225} typeOne />
+            <SinglePlot value={224} typeOne />
+            <SinglePlot value={223} typeOne />
+            <SinglePlot value={222} typeOne />
+            <SinglePlot value={221} typeOne />
+          </Flex>
+          <Flex vertical>
+            <SinglePlot value={210} typeOne />
+            <SinglePlot value={211} typeOne />
+            <SinglePlot value={212} typeOne />
+            <SinglePlot value={213} typeOne />
+            <SinglePlot value={214} typeOne />
+            <SinglePlot value={215} typeOne />
+            <SinglePlot value={216} typeOne />
+            <SinglePlot value={217} typeOne />
+            <SinglePlot value={218} typeOne />
+            <SinglePlot value={219} typeOne />
+            <SinglePlot value={220} typeOne />
+          </Flex>
+        </Flex>
+        <Flex>
+          <Flex vertical>
+            <SinglePlot value={209} typeOne />
+            <SinglePlot value={208} typeOne />
+            <SinglePlot value={207} typeOne />
+            <SinglePlot value={206} typeOne />
+            <SinglePlot value={205} typeOne />
+            <SinglePlot value={204} typeOne />
+            <SinglePlot value={203} typeOne />
+            <SinglePlot value={202} typeOne />
+            <SinglePlot value={201} typeOne />
+            <SinglePlot value={200} typeOne />
+            <SinglePlot value={199} typeOne />
+          </Flex>
+          <Flex vertical>
+            <SinglePlot value={188} typeOne />
+            <SinglePlot value={189} typeOne />
+            <SinglePlot value={190} typeOne />
+            <SinglePlot value={191} typeOne />
+            <SinglePlot value={192} typeOne />
+            <SinglePlot value={193} typeOne />
+            <SinglePlot value={194} typeOne />
+            <SinglePlot value={195} typeOne />
+            <SinglePlot value={196} typeOne />
+            <SinglePlot value={197} typeOne />
+            <SinglePlot value={198} typeOne />
+          </Flex>
+        </Flex>
       </Flex>
+      <Divider>9m road</Divider>
     </div>
   );
 };
