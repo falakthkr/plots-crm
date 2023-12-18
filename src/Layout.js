@@ -107,6 +107,7 @@ const AppLayout = ({ children }) => {
           theme="dark"
           defaultSelectedKeys={["/"]}
           mode="inline"
+          inlineCollapsed={true}
           items={items}
           onSelect={(item) => handleRedirect(item.key)}
         />
