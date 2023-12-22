@@ -13,6 +13,15 @@ const AllUsers = () => {
     {
       title: "Name",
       dataIndex: "name",
+      filterMode: "menu",
+      filterSearch: true,
+      filters: usersData.map((userItem) => {
+        return {
+          text: userItem.name,
+          value: userItem.name,
+        };
+      }),
+      onFilter: (value, record) => record.name.includes(value),
     },
     {
       title: "Role",
