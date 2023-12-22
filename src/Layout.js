@@ -33,11 +33,11 @@ const AppLayout = ({ children }) => {
 
   const items = [
     getItem("Dashboard", <DesktopOutlined />, "/"),
-    getItem("Users", <TeamOutlined />, "/users"),
-    getItem("Plots", <AppstoreOutlined />, "/plots"),
     getItem("Projects", <HomeOutlined />, "/projects"),
-    getItem("Enquiry", <FileOutlined />, "/plot-enquiry"),
     getItem("Stats", <BarChartOutlined />, "/stats"),
+    getItem("Plots", <AppstoreOutlined />, "/plots"),
+    getItem("Bookings", <FileOutlined />, "/plot-booking"),
+    getItem("Users", <TeamOutlined />, "/users"),
     getItem("Profile", <UserOutlined />, "/user-details"),
   ];
   const {
