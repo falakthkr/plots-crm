@@ -6,7 +6,7 @@ import Plots from "../pages/Plots";
 import UserProfile from "../pages/UserProfile";
 import AllUsers from "../pages/AllUsers";
 import Stats from "../pages/Stats";
-import Enquiry from "../pages/Enquiry";
+import Bookings from "../pages/Booking";
 import Projects from "../pages/Projects";
 
 const PublicRoutes = () => {
@@ -22,7 +22,7 @@ const PublicRoutes = () => {
             <Route path="/users" Component={AllUsers} />
             <Route path="/stats" Component={Stats} />
             <Route path="/projects" Component={Projects} />
-            <Route path="/plot-enquiry" Component={Enquiry} />
+            <Route path="/plot-booking" Component={Bookings} />
           </Routes>
         </AppLayout>
       </Router>
