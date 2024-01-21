@@ -110,6 +110,7 @@ const SinglePlot = ({
         <p>Plot ID: {value}</p>
         <p>Plot Size: 1200</p>
         <p>Status: {status ? status : "Open for Sale"}</p>
+        <p>Direction: South</p>
       </>
     );
   };
@@ -120,6 +121,7 @@ const SinglePlot = ({
         <p>Plot ID: {value}</p>
         <p>Plot Size: 2400</p>
         <p>Status: {status ? status : "Open for Sale"}</p>
+        <p>Direction: South</p>
       </>
     );
   };
@@ -140,6 +142,7 @@ const SinglePlot = ({
         <p>Plot ID: {value}</p>
         <p>Plot Size: 12x21m</p>
         <p>Status: {status ? status : "Open for Sale"}</p>
+        <p>Direction: South</p>
       </>
     );
   };
