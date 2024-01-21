@@ -1,17 +1,7 @@
 import React from "react";
-import { Layout, Menu, Breadcrumb, Card, Row, Col } from "antd";
-import {
-  LineChartOutlined,
-  AreaChartOutlined,
-  PieChartOutlined,
-  BarChartOutlined,
-} from "@ant-design/icons";
+import { Card, Row, Col } from "antd";
 import LineChart from "../components/LineChart";
 import BarChart from "../components/BarChart";
-import PieChart from "../components/PieChart";
-
-const { Header, Content, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
 
 const Dashboard = () => {
   return (

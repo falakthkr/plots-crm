@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 import {
   DesktopOutlined,
   FileOutlined,
-  BarChartOutlined,
   TeamOutlined,
   UserOutlined,
   AppstoreOutlined,
@@ -34,7 +33,6 @@ const AppLayout = ({ children }) => {
   const items = [
     getItem("Dashboard", <DesktopOutlined />, "/"),
     getItem("Projects", <HomeOutlined />, "/projects"),
-    // getItem("Stats", <BarChartOutlined />, "/stats"),
     getItem("Plots", <AppstoreOutlined />, "/plots"),
     getItem("Bookings", <FileOutlined />, "/plot-booking"),
     getItem("Users", <TeamOutlined />, "/users"),

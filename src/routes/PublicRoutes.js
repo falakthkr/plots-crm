@@ -20,7 +20,7 @@ const PublicRoutes = () => {
             <Route path="/plots" Component={Plots} />
             <Route path="/user-details" Component={UserProfile} />
             <Route path="/users" Component={AllUsers} />
-            <Route path="/stats" Component={Stats} />
+            {/* <Route path="/stats" Component={Stats} /> */}
             <Route path="/projects" Component={Projects} />
             <Route path="/plot-booking" Component={Bookings} />
           </Routes>

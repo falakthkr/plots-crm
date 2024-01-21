@@ -5,7 +5,6 @@ import {
   Tag,
   Form,
   Input,
-  InputNumber,
   Checkbox,
   Select,
   Button,
@@ -13,26 +12,26 @@ import {
 } from "antd";
 import bookingsData from "../data/bookings.json";
 
-const layout = {
-  labelCol: {
-    span: 7,
-  },
-  wrapperCol: {
-    span: 13,
-  },
-};
+// const layout = {
+//   labelCol: {
+//     span: 7,
+//   },
+//   wrapperCol: {
+//     span: 13,
+//   },
+// };
 
 /* eslint-disable no-template-curly-in-string */
-const validateMessages = {
-  required: "${label} is required!",
-  types: {
-    email: "${label} is not a valid email!",
-    number: "${label} is not a valid phone number!",
-  },
-  number: {
-    range: "${label} must be between 10 digits",
-  },
-};
+// const validateMessages = {
+//   required: "${label} is required!",
+//   types: {
+//     email: "${label} is not a valid email!",
+//     number: "${label} is not a valid phone number!",
+//   },
+//   number: {
+//     range: "${label} must be between 10 digits",
+//   },
+// };
 /* eslint-enable no-template-curly-in-string */
 
 const Plots = () => {
