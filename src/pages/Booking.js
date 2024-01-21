@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Tabs,
   Table,
@@ -128,15 +128,25 @@ const { Option } = Select;
 
 const Enquiry = () => {
   // State to manage form data
-  const [formData, setFormData] = useState({
+  // const [formData, setFormData] = useState({
+  // plotId: "",
+  // userDetails: "",
+  // plotDirections: "",
+  // cornerPlot: false,
+  // paymentMethod: "",
+  // completedPayment: 0,
+  // pendingPayment: 100, // Assuming an initial pending amount of 100
+  // });
+
+  const formData = {
     plotId: "",
     userDetails: "",
     plotDirections: "",
     cornerPlot: false,
     paymentMethod: "",
     completedPayment: 0,
-    pendingPayment: 100, // Assuming an initial pending amount of 100
-  });
+    pendingPayment: 100,
+  };
 
   // Handle form submission
   const handleSubmit = (values) => {

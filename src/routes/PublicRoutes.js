@@ -5,7 +5,6 @@ import Dashboard from "../pages/Dashboard";
 import Plots from "../pages/Plots";
 import UserProfile from "../pages/UserProfile";
 import AllUsers from "../pages/AllUsers";
-import Stats from "../pages/Stats";
 import Bookings from "../pages/Booking";
 import Projects from "../pages/Projects";
 
