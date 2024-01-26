@@ -12,17 +12,6 @@ const layout = {
   },
 };
 
-const validateMessages = {
-  required: "${label} is required!",
-  types: {
-    email: "${label} is not a valid email!",
-    number: "${label} is not a valid phone number!",
-  },
-  number: {
-    range: "${label} must be between 10 digits",
-  },
-};
-
 const EnquiryForm = () => {
   const [enquiries, setEnquiries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -78,7 +67,6 @@ const EnquiryForm = () => {
       style={{ width: "100%" }}
       name="enquiry-form"
       onFinish={onFinish}
-      validateMessages={validateMessages}
     >
       <Form.Item
         name="plotId"

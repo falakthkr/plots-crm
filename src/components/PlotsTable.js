@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Space, Button, Modal } from "antd";
-
-const { confirm } = Modal;
+import { Table } from "antd";
 
 const EnquirieTable = () => {
   const [enquiries, setEnquiries] = useState([]);
