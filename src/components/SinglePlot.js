@@ -83,7 +83,6 @@ const SinglePlot = ({
       };
       setPingCount((prev) => prev + 1);
     }
-    console.log(pingCount);
   }, [garden, pingCount, typeFour, typeOne, typeThree, typeTwo]);
 
   /** helper functions */
@@ -99,7 +98,7 @@ const SinglePlot = ({
     setIsModalOpen(false);
   };
   const onFinish = (values) => {
-    console.log(values);
+    // console.log(values);
   };
 
   /** render functions */
@@ -152,13 +151,24 @@ const SinglePlot = ({
       <Form
         {...layout}
         style={{ width: "100%" }}
-        name="nest-messages"
+        name="enquiry-form"
         onFinish={onFinish}
         validateMessages={validateMessages}
       >
         <Form.Item
-          name={["user", "name"]}
-          label="Name"
+          name="plotId"
+          label="Plot ID"
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        >
+          <Input disabled value={value} />
+        </Form.Item>
+        <Form.Item
+          name="userDetails"
+          label="User Details"
           rules={[
             {
               required: true,
@@ -168,21 +178,14 @@ const SinglePlot = ({
           <Input />
         </Form.Item>
         <Form.Item
-          name={["user", "phone number"]}
-          label="Ph. Number"
-          rules={[
-            {
-              type: "number",
-              required: true,
-              min: 1111111111,
-              max: 9999999999,
-            },
-          ]}
+          wrapperCol={{
+            ...layout.wrapperCol,
+            offset: 5,
+          }}
         >
-          <InputNumber style={{ width: "100%" }} />
-        </Form.Item>
-        <Form.Item name={["user", "notes"]} label="Notes">
-          <Input.TextArea />
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form.Item>
       </Form>
     );

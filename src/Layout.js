@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import {
   DesktopOutlined,
   FileOutlined,
@@ -7,12 +8,15 @@ import {
   UserOutlined,
   AppstoreOutlined,
   HomeOutlined,
+  LogoutOutlined,
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { logoutUser } from "./store/actions/authActions";
+import { Breadcrumb, Layout, Menu, theme, message } from "antd";
 
 const AppLayout = ({ children }) => {
   const navigateTo = useNavigate();
   const location = useLocation();
+  const dispatch = useDispatch();
 
   /** helper functions */
   const getItem = (label, icon, key) => {
@@ -27,12 +31,36 @@ const AppLayout = ({ children }) => {
     navigateTo(route);
   };
 
+  const handleLogout = async () => {
+    try {
+      // Assuming logoutUser returns a response with a 'token' property
+      const response = await dispatch(logoutUser());
+
+      // Check if the response contains a token
+      if (response) {
+        // Store the token in localStorage
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("userEmail");
+        localStorage.removeItem("role");
+        message.success("Logout successful.");
+        handleRedirect("/");
+      } else {
+        // Handle the case where the response does not contain a token
+        message.error("Logout failed.");
+      }
+    } catch (error) {
+      // Handle logout failure or other errors
+      console.error("Logout failed:", error);
+      message.error("Logout failed.");
+    }
+  };
+
   /** constants */
   const { Content, Footer, Sider } = Layout;
 
   const items = [
-    getItem("Dashboard", <DesktopOutlined />, "/"),
-    getItem("Projects", <HomeOutlined />, "/projects"),
+    getItem("Dashboard", <DesktopOutlined />, "/dashboard"),
+    // getItem("Projects", <HomeOutlined />, "/projects"),
     getItem("Plots", <AppstoreOutlined />, "/plots"),
     getItem("Bookings", <FileOutlined />, "/plot-booking"),
     getItem("Users", <TeamOutlined />, "/users"),
@@ -47,7 +75,7 @@ const AppLayout = ({ children }) => {
     const currentRoute = location.pathname;
     let breadCrumb = "Dashboard";
     switch (currentRoute) {
-      case "/":
+      case "/dashboard":
         breadCrumb = "Dashboard";
         break;
       case "/plots":
@@ -109,6 +137,19 @@ const AppLayout = ({ children }) => {
           items={items}
           onSelect={(item) => handleRedirect(item.key)}
         />
+        <div
+          style={{
+            position: "absolute",
+            bottom: 20,
+            left: 20,
+            cursor: "pointer",
+            color: "white",
+          }}
+          onClick={handleLogout}
+        >
+          <LogoutOutlined style={{ marginRight: 8 }} />
+          Logout
+        </div>
       </Sider>
     );
   };

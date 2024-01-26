@@ -1,31 +1,27 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AppLayout from "../Layout";
-import Dashboard from "../pages/Dashboard";
-import Plots from "../pages/Plots";
-import UserProfile from "../pages/UserProfile";
-import AllUsers from "../pages/AllUsers";
-import Bookings from "../pages/Booking";
-import Projects from "../pages/Projects";
+import Login from "../components/Login";
+import PrivateRoutes from "./PrivateRoutes";
+import { useNavigate } from "react-router-dom";
 
 const PublicRoutes = () => {
+  const navigateTo = useNavigate();
   /** render functions */
   const RenderAllRoutes = () => {
-    return (
-      <Router>
+    if (!localStorage.getItem("authToken")) {
+      return (
+        <Routes>
+          <Route path="/" exact Component={Login} />
+        </Routes>
+      );
+    } else {
+      return (
         <AppLayout>
-          <Routes>
-            <Route path="/" exact Component={Dashboard} />
-            <Route path="/plots" Component={Plots} />
-            <Route path="/user-details" Component={UserProfile} />
-            <Route path="/users" Component={AllUsers} />
-            {/* <Route path="/stats" Component={Stats} /> */}
-            <Route path="/projects" Component={Projects} />
-            <Route path="/plot-booking" Component={Bookings} />
-          </Routes>
+          <PrivateRoutes />
         </AppLayout>
-      </Router>
-    );
+      );
+    }
   };
   return <div className="PublicRoutesWrapper">{RenderAllRoutes()}</div>;
 };
