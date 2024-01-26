@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Table } from "antd";
 
-const EnquirieTable = () => {
+const EnquiryTable = () => {
   const [enquiries, setEnquiries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -9,7 +9,7 @@ const EnquirieTable = () => {
     const fetchEnquiries = async () => {
       try {
         const response = await fetch(
-          "https://plots-crm-backend.vercel.app/api/plots/enquiries"
+          "https://plots-crm-backend.vercel.app/api/plots/all-enquiries"
         );
         if (response.ok) {
           const data = await response.json();
@@ -74,4 +74,4 @@ const EnquirieTable = () => {
   );
 };
 
-export default EnquirieTable;
+export default EnquiryTable;

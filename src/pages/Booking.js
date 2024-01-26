@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
 import EnquiryForm from "./Enquiry";
-import EnquirieTable from "../components/PlotsTable";
+import EnquiryTable from "../components/PlotsTable";
 
 const Bookings = () => (
   <Tabs
@@ -11,7 +11,7 @@ const Bookings = () => (
       {
         label: "Plots",
         key: 1,
-        children: <EnquirieTable />,
+        children: <EnquiryTable />,
       },
       {
         label: "Enquiry",

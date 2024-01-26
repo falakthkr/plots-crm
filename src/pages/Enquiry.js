@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button, Form, Input, InputNumber, Select } from "antd";
 
 const { Option } = Select;
@@ -13,34 +13,11 @@ const layout = {
 };
 
 const EnquiryForm = () => {
-  const [enquiries, setEnquiries] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchEnquiries = async () => {
-      try {
-        const response = await fetch(
-          "https://plots-crm-backend.vercel.app/api/enquiries"
-        );
-        if (response.ok) {
-          const data = await response.json();
-          setEnquiries(data);
-        }
-      } catch (error) {
-        console.error("Error fetching enquiries:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchEnquiries();
-  }, []);
-
   const onFinish = async (values) => {
     try {
       // Call your API to add the enquiry with the form values here
       const response = await fetch(
-        "https://plots-crm-backend.vercel.app/api/enquiries",
+        "https://plots-crm-backend.vercel.app/api/plots/enquiry",
         {
           method: "POST",
           headers: {
@@ -68,7 +45,7 @@ const EnquiryForm = () => {
       name="enquiry-form"
       onFinish={onFinish}
     >
-      <Form.Item
+      {/* <Form.Item
         name="plotId"
         label="Plot ID"
         rules={[
@@ -91,6 +68,17 @@ const EnquiryForm = () => {
             </Option>
           ))}
         </Select>
+      </Form.Item> */}
+      <Form.Item
+        name="plotId"
+        label="Plot ID"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <InputNumber />
       </Form.Item>
       <Form.Item
         name="userDetails"

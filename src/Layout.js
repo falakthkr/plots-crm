@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -11,11 +11,14 @@ import {
 } from "@ant-design/icons";
 import { logoutUser } from "./store/actions/authActions";
 import { Breadcrumb, Layout, Menu, theme, message } from "antd";
+import Navbar from "./components/Navbar";
 
 const AppLayout = ({ children }) => {
   const navigateTo = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const [selectedProject, setSelectedProject] = useState("project1");
 
   /** helper functions */
   const getItem = (label, icon, key) => {
@@ -28,6 +31,12 @@ const AppLayout = ({ children }) => {
 
   const handleRedirect = (route) => {
     navigateTo(route);
+  };
+
+  const handleProjectChange = (project) => {
+    // You can perform any logic or dispatch actions related to project change here
+    console.log("Selected Project:", project);
+    setSelectedProject(project);
   };
 
   const handleLogout = async () => {
@@ -110,6 +119,7 @@ const AppLayout = ({ children }) => {
       </Breadcrumb>
     );
   };
+
   const renderSidebar = () => {
     return (
       <Sider
@@ -152,6 +162,7 @@ const AppLayout = ({ children }) => {
       </Sider>
     );
   };
+
   const renderContent = () => {
     return (
       <Content
@@ -194,6 +205,12 @@ const AppLayout = ({ children }) => {
       >
         {renderSidebar()}
         <Layout>
+          <Navbar
+            selectedProject={selectedProject}
+            onProjectChange={handleProjectChange}
+            userName="Your Name" // Replace with actual user data
+            userAvatar="path-to-avatar-image.jpg" // Replace with actual user data
+          />
           {renderContent()}
           {renderFooter()}
         </Layout>

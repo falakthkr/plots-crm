@@ -22,6 +22,7 @@ const Login = () => {
         localStorage.setItem("authToken", response.token);
         localStorage.setItem("userEmail", response.email);
         localStorage.setItem("role", response.role);
+        localStorage.setItem("userName", response.fullName);
         message.success("Login successful.");
         navigateTo("/dashboard");
       } else {
