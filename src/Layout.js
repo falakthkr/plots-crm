@@ -7,7 +7,6 @@ import {
   TeamOutlined,
   UserOutlined,
   AppstoreOutlined,
-  HomeOutlined,
   LogoutOutlined,
 } from "@ant-design/icons";
 import { logoutUser } from "./store/actions/authActions";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Button, Modal, Form, Input, InputNumber } from "antd";
+import { Button, Modal, Form, Input } from "antd";
 
 const layout = {
   labelCol: {
