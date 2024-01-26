@@ -30,7 +30,9 @@ const EnquiryForm = () => {
   useEffect(() => {
     const fetchEnquiries = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/enquiries");
+        const response = await fetch(
+          "https://plots-crm-backend.vercel.app/api/enquiries"
+        );
         if (response.ok) {
           const data = await response.json();
           setEnquiries(data);
@@ -48,13 +50,16 @@ const EnquiryForm = () => {
   const onFinish = async (values) => {
     try {
       // Call your API to add the enquiry with the form values here
-      const response = await fetch("http://localhost:8080/api/enquiries", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const response = await fetch(
+        "https://plots-crm-backend.vercel.app/api/enquiries",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();

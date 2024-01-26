@@ -15,7 +15,7 @@ const UserProfile = () => {
       try {
         // Make an API call to fetch user details using the authToken
         const response = await axios.post(
-          "http://localhost:8080/api/auth/user",
+          "https://plots-crm-backend.vercel.app/api/auth/user",
           {
             email: localStorage.getItem("userEmail"),
           }
@@ -42,11 +42,15 @@ const UserProfile = () => {
   const handleSave = async (values) => {
     try {
       // Make an API call to update user details using the authToken
-      await axios.put("http://localhost:8080/api/auth/user", values, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
-        },
-      });
+      await axios.put(
+        "https://plots-crm-backend.vercel.app/api/auth/user",
+        values,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        }
+      );
 
       setEditMode(false);
       message.success("User profile updated successfully.");

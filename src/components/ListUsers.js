@@ -12,7 +12,7 @@ const ListUsers = () => {
       try {
         // Replace "user@example.com" with the actual email you want to use
         const response = await axios.get(
-          "http://localhost:8080/api/auth/users"
+          "https://plots-crm-backend.vercel.app/api/auth/users"
         );
 
         setUsers(response.data);

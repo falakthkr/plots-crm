@@ -11,7 +11,7 @@ const EnquirieTable = () => {
     const fetchEnquiries = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8080/api/plots/enquiries"
+          "https://plots-crm-backend.vercel.app/api/plots/enquiries"
         );
         if (response.ok) {
           const data = await response.json();
