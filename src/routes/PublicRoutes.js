@@ -3,10 +3,8 @@ import { Route, Routes } from "react-router-dom";
 import AppLayout from "../Layout";
 import Login from "../components/Login";
 import PrivateRoutes from "./PrivateRoutes";
-import { useNavigate } from "react-router-dom";
 
 const PublicRoutes = () => {
-  const navigateTo = useNavigate();
   /** render functions */
   const RenderAllRoutes = () => {
     if (!localStorage.getItem("authToken")) {
