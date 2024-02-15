@@ -205,12 +205,12 @@ const AppLayout = ({ children }) => {
       >
         {renderSidebar()}
         <Layout>
-          <Navbar
+          {/* <Navbar
             selectedProject={selectedProject}
             onProjectChange={handleProjectChange}
             userName="Your Name" // Replace with actual user data
             userAvatar="path-to-avatar-image.jpg" // Replace with actual user data
-          />
+          /> */}
           {renderContent()}
           {renderFooter()}
         </Layout>

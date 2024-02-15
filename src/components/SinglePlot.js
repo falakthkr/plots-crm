@@ -219,3 +219,30 @@ const SinglePlot = ({
 };
 
 export default SinglePlot;
+
+// const plotsSchema = [
+//   [
+//     [
+//       {
+//         value: 1,
+//         type: typeOne,
+//         status: booked,
+//       },
+//     ],
+//     [
+//       {
+//         value: 2,
+//         type: typeOne,
+//         status: "pending",
+//       },
+//     ],
+//     [],
+//     [],
+//     [],
+//     [],
+//     [],
+//     [],
+//     [],
+//   ],
+//   [[], [], [], [], [], [], [], [], []],
+// ];

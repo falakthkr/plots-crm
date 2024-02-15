@@ -12,13 +12,10 @@ const Login = () => {
 
   const onFinish = async (values) => {
     try {
-      // Assuming loginUser returns a response with a 'token' property
       const response = await dispatch(loginUser(values));
 
-      // Check if the response contains a token
       if (response && response.token) {
         console.log(response);
-        // Store the token in localStorage
         localStorage.setItem("authToken", response.token);
         localStorage.setItem("userEmail", response.email);
         localStorage.setItem("role", response.role);
@@ -26,34 +23,53 @@ const Login = () => {
         message.success("Login successful.");
         navigateTo("/dashboard");
       } else {
-        // Handle the case where the response does not contain a token
         message.error("Login failed. Invalid response format.");
       }
     } catch (error) {
-      // Handle login failure or other errors
       console.error("Login failed:", error);
       message.error("Login failed. Check your credentials.");
     }
   };
 
   return (
-    <Form
-      form={form}
-      onFinish={onFinish}
-      style={{ maxWidth: "300px", margin: "auto" }}
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+        backgroundColor: "#B5EAD6",
+      }}
     >
-      <Form.Item label="Email" name="email">
-        <Input />
-      </Form.Item>
-      <Form.Item label="Password" name="password">
-        <Input.Password />
-      </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Login
-        </Button>
-      </Form.Item>
-    </Form>
+      <Form
+        form={form}
+        onFinish={onFinish}
+        style={{
+          minWidth: "500px",
+          padding: "20px",
+          borderRadius: "8px",
+          boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
+          backgroundColor: "white",
+        }}
+      >
+        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Login</h2>
+        <Form.Item label="Email" name="email">
+          <Input />
+        </Form.Item>
+        <Form.Item label="Password" name="password">
+          <Input.Password />
+        </Form.Item>
+        <Form.Item style={{ textAlign: "center" }}>
+          <Button
+            type="primary"
+            style={{ backgroundColor: "A3E1DC" }}
+            htmlType="submit"
+          >
+            Login
+          </Button>
+        </Form.Item>
+      </Form>
+    </div>
   );
 };
 
