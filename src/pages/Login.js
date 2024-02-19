@@ -2,7 +2,7 @@
 import React from "react";
 import { Form, Input, Button, message } from "antd";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../store/actions/authActions";
+import { userLogin } from "../store/actions/authActions";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -12,16 +12,14 @@ const Login = () => {
 
   const onFinish = async (values) => {
     try {
-      const response = await dispatch(loginUser(values));
-
-      if (response && response.token) {
-        console.log(response);
-        localStorage.setItem("authToken", response.token);
-        localStorage.setItem("userEmail", response.email);
-        localStorage.setItem("role", response.role);
-        localStorage.setItem("userName", response.fullName);
+      const response = await dispatch(userLogin(values));
+      if (response && response.data.token) {
+        localStorage.setItem("authToken", response.data.token);
+        localStorage.setItem("userEmail", response.data.email);
+        localStorage.setItem("role", response.data.role);
+        localStorage.setItem("userName", response.data.fullName);
         message.success("Login successful.");
-        navigateTo("/dashboard");
+        navigateTo("/select-project");
       } else {
         message.error("Login failed. Invalid response format.");
       }
@@ -34,11 +32,10 @@ const Login = () => {
   return (
     <div
       style={{
+        height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#B5EAD6",
       }}
     >
       <Form
@@ -48,16 +45,22 @@ const Login = () => {
           minWidth: "500px",
           padding: "20px",
           borderRadius: "8px",
-          boxShadow: "0 0 20px rgba(0, 0, 0, 0.1)",
           backgroundColor: "white",
         }}
       >
-        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>Login</h2>
-        <Form.Item label="Email" name="email">
-          <Input />
+        <h2
+          style={{
+            textAlign: "center",
+            marginBottom: "20px",
+          }}
+        >
+          Login
+        </h2>
+        <Form.Item name="email">
+          <Input placeholder="Enter Email" />
         </Form.Item>
-        <Form.Item label="Password" name="password">
-          <Input.Password />
+        <Form.Item name="password">
+          <Input.Password placeholder="Enter Password" />
         </Form.Item>
         <Form.Item style={{ textAlign: "center" }}>
           <Button
