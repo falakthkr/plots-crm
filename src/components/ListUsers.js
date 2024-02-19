@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const ListUsers = () => {
   const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const navigateTo = useNavigate();
 
   useEffect(() => {
@@ -18,6 +19,8 @@ const ListUsers = () => {
         setUsers(response.data);
       } catch (error) {
         message.error("Failed to fetch users.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -69,6 +72,7 @@ const ListUsers = () => {
       <Table
         dataSource={users}
         columns={columns}
+        loading={isLoading}
         rowKey={(record) => record._id} // Adjust with your actual unique identifier
       />
     </div>
