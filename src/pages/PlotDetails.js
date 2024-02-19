@@ -32,16 +32,6 @@ const EnquiryTable = ({ enquiries, onSelectEnquiry }) => {
   );
 };
 
-const Plot = ({ plot }) => {
-  return (
-    <Card title="Plot">
-      <p>ID: {plot.id}</p>
-      <p>Name: {plot.name}</p>
-      {/* Add more plot details as needed */}
-    </Card>
-  );
-};
-
 const UserDetails = ({ user }) => {
   return (
     <Card title="User Details">

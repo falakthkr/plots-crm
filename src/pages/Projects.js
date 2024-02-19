@@ -1,42 +1,50 @@
 import React from "react";
-import { Table } from "antd";
-import projectsData from "../data/projects.json";
+import { Form, Select } from "antd";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../store/actions/authActions";
+import { useNavigate } from "react-router-dom";
 
 const Projects = () => {
-  /** constants */
-  const columns = [
-    {
-      title: "Project ID",
-      dataIndex: "id",
-      sorter: (a, b) => a.id - b.id,
-    },
-    {
-      title: "Project Name",
-      dataIndex: "project_name",
-    },
-    {
-      title: "Company",
-      dataIndex: "developer_name",
-    },
-    {
-      title: "Location",
-      dataIndex: "location",
-    },
-  ];
+  const { Option } = Select;
+  // const dispatch = useDispatch();
+  const navigateTo = useNavigate();
+  const [form] = Form.useForm();
 
-  /** helper functions */
-  const onChange = (pagination, filters, sorter, extra) => {
-    console.log("params", pagination, filters, sorter, extra);
+  const onFinish = async (values) => {
+    navigateTo("/");
   };
 
-  /** render functions */
-  const RenderProjectsTable = () => {
-    return (
-      <Table columns={columns} dataSource={projectsData} onChange={onChange} />
-    );
-  };
-
-  return <div className="ProjectsWrapper">{RenderProjectsTable()}</div>;
+  return (
+    <div
+      style={{
+        height: "80vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Form
+        form={form}
+        style={{
+          minWidth: "500px",
+          borderRadius: "8px",
+          backgroundColor: "white",
+        }}
+      >
+        <Form.Item name="selectProject">
+          <Select
+            onChange={onFinish}
+            placeholder="Select Project"
+            options={[
+              { value: "projectOne", label: "Project 1" },
+              { value: "projectTwo", label: "Project 2" },
+              { value: "projectThree", label: "Project 3" },
+            ]}
+          />
+        </Form.Item>
+      </Form>
+    </div>
+  );
 };
 
 export default Projects;

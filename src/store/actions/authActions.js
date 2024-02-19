@@ -1,16 +1,46 @@
 // src/store/actions/authActions.js
 import axios from "axios";
+import {
+  USER_LOGIN_FAILURE,
+  USER_LOGIN_PENDING,
+  USER_LOGIN_SUCCESS,
+} from "../actionTypes.js/authActionTypes";
 
-export const loginUser = (credentials) => async (dispatch) => {
+const userLoginSuccess = (payload) => (dispatch) => {
+  console.log(payload);
+  dispatch({
+    type: USER_LOGIN_SUCCESS,
+    payload,
+  });
+};
+
+const userLoginFailure = (payload) => (dispatch) => {
+  dispatch({
+    type: USER_LOGIN_FAILURE,
+    payload,
+  });
+};
+
+const userLoginPending = () => (dispatch) => {
+  dispatch({
+    type: USER_LOGIN_PENDING,
+  });
+};
+
+export const userLogin = (credentials) => async (dispatch) => {
+  dispatch(userLoginPending());
   try {
     const response = await axios.post(
       "https://plots-crm-backend.vercel.app/api/auth/login",
       credentials
     );
-    // You might want to dispatch user data or token to the Redux store here
-    return response.data;
+    if (response.data.token) {
+      console.log("here");
+      dispatch(userLoginSuccess(response));
+      return response;
+    }
   } catch (error) {
-    throw error;
+    dispatch(userLoginFailure(error));
   }
 };
 
