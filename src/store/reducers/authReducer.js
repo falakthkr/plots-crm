@@ -5,7 +5,7 @@ import {
 } from "../actionTypes.js/authActionTypes";
 
 const initialState = {
-  isAuth: true,
+  isAuth: false,
   userData: null,
   isError: false,
   isLoading: false,

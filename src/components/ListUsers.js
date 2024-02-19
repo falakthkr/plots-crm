@@ -41,21 +41,25 @@ const ListUsers = () => {
       title: "Email",
       dataIndex: "email",
       key: "email",
+      align: "center",
     },
     {
       title: "Full Name",
       dataIndex: "fullName",
       key: "fullName",
+      align: "center",
     },
     {
       title: "Phone Number",
       dataIndex: "phoneNumber",
       key: "phoneNumber",
+      align: "center",
     },
     {
       title: "Role",
       dataIndex: "role",
       key: "role",
+      align: "center",
     },
     // Add more columns as needed
   ];

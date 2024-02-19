@@ -30,37 +30,44 @@ const EnquiryTable = () => {
       title: "Plot ID",
       dataIndex: "plotId",
       key: "plotId",
+      align: "center",
     },
     {
       title: "User Details",
       dataIndex: "userDetails",
       key: "userDetails",
+      align: "center",
     },
     {
       title: "Plot Directions",
       dataIndex: "plotDirections",
       key: "plotDirections",
+      align: "center",
     },
     {
       title: "Is Corner Plot",
       dataIndex: "isCornerPlot",
       key: "isCornerPlot",
       render: (text, record) => (text ? "Yes" : "No"),
+      align: "center",
     },
     {
       title: "Payment Method",
       dataIndex: "paymentMethod",
       key: "paymentMethod",
+      align: "center",
     },
     {
       title: "Pending Payment",
       dataIndex: "pendingPayment",
       key: "pendingPayment",
+      align: "center",
     },
     {
       title: "Status",
       dataIndex: "status",
       key: "status",
+      align: "center",
     },
   ];
 
