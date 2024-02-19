@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Table, Modal, Button } from "antd";
+import { Table, Space, Button } from "antd";
+import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 
 /** type one : 1200
  *  type two : 2400
@@ -399,29 +400,50 @@ import { Table, Modal, Button } from "antd";
 // };
 
 const Plots = () => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalImage, setModalImage] = useState("");
+
+  // const showModal = (image) => {
+  //   setModalImage(image);
+  //   setModalVisible(true);
+  // };
+
+  // const handleCancel = () => {
+  //   setModalVisible(false);
+  // };
+
+  const renderActions = (data) => {
+    return (
+      <Space size="middle">
+        <EyeOutlined style={{ color: "green" }} />
+        <EditOutlined style={{ color: "blue" }} />
+      </Space>
+    );
+  };
+
   const columns = [
     {
       title: "Plot ID",
       dataIndex: "plotId",
       key: "plotId",
-      align: "left",
+      align: "center",
     },
-    {
-      title: "Plots Image",
-      dataIndex: "plotImage",
-      key: "plotImage",
-      align: "left",
-      render: (plotImage) => (
-        <Button type="link" onClick={() => showModal(plotImage)}>
-          View Image
-        </Button>
-      ),
-    },
+    // {
+    //   title: "Plots Image",
+    //   dataIndex: "plotImage",
+    //   key: "plotImage",
+    //   align: "center",
+    //   render: (plotImage) => (
+    //     <Button type="link" onClick={() => showModal(plotImage)}>
+    //       View Image
+    //     </Button>
+    //   ),
+    // },
     {
       title: "Plot Size",
       dataIndex: "plotSize",
       key: "plotSize",
-      align: "left",
+      align: "center",
       render: (plotSize) => {
         switch (plotSize) {
           case "typeOne":
@@ -438,16 +460,35 @@ const Plots = () => {
       },
     },
     {
-      title: "Plot Directions",
-      dataIndex: "plotDirections",
-      key: "plotDirections",
-      align: "left",
+      title: "Plot Direction",
+      dataIndex: "plotDirection",
+      key: "plotDirection",
+      align: "center",
+    },
+    {
+      title: "Plot Price",
+      dataIndex: "plotPrice",
+      key: "plotPrice",
+      align: "center",
+    },
+    {
+      title: "Total Plot Enquiries",
+      dataIndex: "totalEnquiries",
+      key: "totalEnquiries",
+      align: "center",
     },
     {
       title: "Plot Status",
       dataIndex: "plotStatus",
       key: "plotStatus",
-      align: "left",
+      align: "center",
+    },
+    {
+      title: "Actions",
+      dataIndex: "actions",
+      key: "actions",
+      align: "center",
+      render: renderActions,
     },
   ];
 
@@ -455,43 +496,36 @@ const Plots = () => {
     {
       key: "1",
       plotId: "001",
-      plotImage: "https://example.com/plot1.jpg",
+      // plotImage: "https://example.com/plot1.jpg",
       plotSize: "typeOne",
-      plotDirections: "North-East",
+      plotDirection: "North-East",
+      plotPrice: "1.5 Cr.",
       plotStatus: "Open",
+      totalEnquiries: 20,
     },
     {
       key: "2",
       plotId: "002",
-      plotImage: "https://example.com/plot2.jpg",
+      // plotImage: "https://example.com/plot2.jpg",
       plotSize: "typeFour",
-      plotDirections: "South-West",
+      plotDirection: "South-West",
+      plotPrice: "2 Cr.",
       plotStatus: "Booked",
+      totalEnquiries: 5,
     },
   ];
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalImage, setModalImage] = useState("");
-
-  const showModal = (image) => {
-    setModalImage(image);
-    setModalVisible(true);
-  };
-
-  const handleCancel = () => {
-    setModalVisible(false);
-  };
 
   return (
     <div>
       <Table columns={columns} dataSource={data} />
-      <Modal
+      {/* <Modal
         title="Plot Image"
         visible={modalVisible}
         onCancel={handleCancel}
         footer={null}
       >
         <img src={modalImage} alt="Plot" style={{ width: "100%" }} />
-      </Modal>
+      </Modal> */}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
-// import Plots from "../pages/Plots";
+import Plots from "../pages/Plots";
 import UserProfile from "../pages/UserProfile";
 import Bookings from "../pages/Booking";
 import AddUser from "../components/AddUser";
@@ -23,7 +23,7 @@ const PrivateRoutes = () => {
       <Route path="/plots/:id" Component={PlotDetails} />
       <Route path="/user-details" Component={UserProfile} />
       <Route path="/bookings" Component={Bookings} />
-      <Route path="/plots" Component={ViewAllPlots} />
+      <Route path="/plots" Component={Plots} />
       <Route path="/enquiries" Component={Enquiries} />
       <Route path="/add-enquiry" Component={AddEnquiry} />
     </Routes>
