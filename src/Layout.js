@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -8,17 +8,15 @@ import {
   UserOutlined,
   AppstoreOutlined,
   LogoutOutlined,
+  FormOutlined,
 } from "@ant-design/icons";
 import { logoutUser } from "./store/actions/authActions";
 import { Breadcrumb, Layout, Menu, theme, message } from "antd";
-import Navbar from "./components/Navbar";
 
 const AppLayout = ({ children }) => {
   const navigateTo = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
-
-  const [selectedProject, setSelectedProject] = useState("project1");
 
   /** helper functions */
   const getItem = (label, icon, key) => {
@@ -31,12 +29,6 @@ const AppLayout = ({ children }) => {
 
   const handleRedirect = (route) => {
     navigateTo(route);
-  };
-
-  const handleProjectChange = (project) => {
-    // You can perform any logic or dispatch actions related to project change here
-    console.log("Selected Project:", project);
-    setSelectedProject(project);
   };
 
   const handleLogout = async () => {
@@ -67,11 +59,12 @@ const AppLayout = ({ children }) => {
   const { Content, Footer, Sider } = Layout;
 
   const items = [
-    getItem("Dashboard", <DesktopOutlined />, "/dashboard"),
+    getItem("Dashboard", <DesktopOutlined />, "/"),
     // getItem("Projects", <HomeOutlined />, "/projects"),
     getItem("Plots", <AppstoreOutlined />, "/plots"),
-    getItem("Bookings", <FileOutlined />, "/plot-booking"),
+    getItem("Bookings", <FileOutlined />, "/bookings"),
     getItem("Users", <TeamOutlined />, "/users"),
+    getItem("Enquiries", <FormOutlined />, "/enquiries"),
     getItem("Profile", <UserOutlined />, "/user-details"),
   ];
   const {
@@ -83,26 +76,41 @@ const AppLayout = ({ children }) => {
     const currentRoute = location.pathname;
     let breadCrumb = "Dashboard";
     switch (currentRoute) {
-      case "/dashboard":
+      case "/":
         breadCrumb = "Dashboard";
         break;
       case "/plots":
         breadCrumb = "Plots";
         break;
       case "/user-details":
-        breadCrumb = "User Profile";
+        breadCrumb = "User Details";
         break;
       case "/users":
-        breadCrumb = "All Users Data";
+        breadCrumb = "All Users";
         break;
       case "/stats":
         breadCrumb = "Stats";
         break;
-      case "/plot-enquiry":
-        breadCrumb = "Enquiry";
+      case "/enquiries":
+        breadCrumb = "Enquiries";
+        break;
+      case "/add-enquiry":
+        breadCrumb = "Add Enquiry";
         break;
       case "/projects":
         breadCrumb = "Projects";
+        break;
+      case "/bookings":
+        breadCrumb = "Bookings";
+        break;
+      case "/select-project":
+        breadCrumb = "Select Project";
+        break;
+      case "/add-user":
+        breadCrumb = "Add User";
+        break;
+      case "/plots/:id":
+        breadCrumb = "Plot Details";
         break;
       default:
         breadCrumb = "Dashboard";
@@ -132,12 +140,13 @@ const AppLayout = ({ children }) => {
           bottom: 0,
         }}
       >
-        <img
+        {/* <img
           src="https://walidevelopers.com/pmswali/header.jpg"
           width={180}
           style={{ margin: "10px" }}
           alt="wali developers logo"
-        />
+        /> */}
+        <h2 style={{ color: "lightgrey" }}>Wali Developers</h2>
         <Menu
           theme="dark"
           defaultSelectedKeys={["/"]}
@@ -149,8 +158,8 @@ const AppLayout = ({ children }) => {
         <div
           style={{
             position: "absolute",
-            bottom: 20,
-            left: 20,
+            bottom: 30,
+            left: 50,
             cursor: "pointer",
             color: "white",
           }}
@@ -205,12 +214,6 @@ const AppLayout = ({ children }) => {
       >
         {renderSidebar()}
         <Layout>
-          {/* <Navbar
-            selectedProject={selectedProject}
-            onProjectChange={handleProjectChange}
-            userName="Your Name" // Replace with actual user data
-            userAvatar="path-to-avatar-image.jpg" // Replace with actual user data
-          /> */}
           {renderContent()}
           {renderFooter()}
         </Layout>

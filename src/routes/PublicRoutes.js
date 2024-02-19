@@ -1,13 +1,17 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import AppLayout from "../Layout";
-import Login from "../components/Login";
+import Login from "../pages/Login";
 import PrivateRoutes from "./PrivateRoutes";
+import { useSelector } from "react-redux";
+import AppLayout from "../Layout";
 
 const PublicRoutes = () => {
+  const isAuth = useSelector((state) => state.auth.isAuth);
+
   /** render functions */
   const RenderAllRoutes = () => {
-    if (!localStorage.getItem("authToken")) {
+    console.log(isAuth);
+    if (!isAuth) {
       return (
         <Routes>
           <Route path="/" exact Component={Login} />
