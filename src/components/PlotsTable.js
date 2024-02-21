@@ -6,7 +6,7 @@ const EnquiryTable = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchEnquiries = async () => {
+    const fetchAllEnquiries = async () => {
       try {
         const response = await fetch(
           "https://plots-crm-backend.vercel.app/api/plots/all-enquiries"
@@ -22,7 +22,7 @@ const EnquiryTable = () => {
       }
     };
 
-    fetchEnquiries();
+    fetchAllEnquiries();
   }, []);
 
   const columns = [

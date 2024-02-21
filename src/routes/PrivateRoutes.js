@@ -25,7 +25,7 @@ const PrivateRoutes = () => {
       <Route path="/bookings" Component={Bookings} />
       <Route path="/plots" Component={Plots} />
       <Route path="/enquiries" Component={Enquiries} />
-      <Route path="/add-enquiry" Component={AddEnquiry} />
+      <Route path="/add-enquiry/:id" Component={AddEnquiry} />
     </Routes>
   );
 };
