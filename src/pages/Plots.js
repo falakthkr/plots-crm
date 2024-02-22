@@ -3,7 +3,7 @@ import { Table, Space, message, Tag } from "antd";
 import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 
 const Plots = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [plotsData, setPlotsData] = useState(null);
 
   useEffect(() => {
@@ -14,7 +14,6 @@ const Plots = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          console.log(data, "data");
           setPlotsData(data);
         }
       } catch (error) {

@@ -7,7 +7,6 @@ import {
 } from "../actionTypes.js/authActionTypes";
 
 const userLoginSuccess = (payload) => (dispatch) => {
-  console.log(payload);
   dispatch({
     type: USER_LOGIN_SUCCESS,
     payload,
@@ -35,9 +34,7 @@ export const userLogin = (credentials) => async (dispatch) => {
       credentials
     );
     if (response.data.token) {
-      console.log("here");
       dispatch(userLoginSuccess(response));
-      return response;
     }
   } catch (error) {
     dispatch(userLoginFailure(error));

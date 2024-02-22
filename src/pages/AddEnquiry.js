@@ -1,14 +1,26 @@
 import { useParams } from "react-router-dom";
 import { Form, Input, Button, message } from "antd";
+import { addEnquiryCall } from "../store/actions/enquiryActions";
 import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const { TextArea } = Input;
 
 const AddEnquiry = () => {
-  const onFinish = (values) => {
-    console.log("Received values:", values);
-    message.success("Enquiry added successfully");
-    // You can handle form submission logic here
+  const dispatch = useDispatch();
+  const [form] = Form.useForm();
+  const navigateTo = useNavigate();
+
+  const onFinish = async (values) => {
+    try {
+      await dispatch(addEnquiryCall(values));
+      message.success("Enquiry added successfully.");
+      navigateTo("/enquiries");
+      form.resetFields();
+    } catch (error) {
+      message.error("Failed to add enquiry.");
+    }
   };
   useEffect(() => {
     // fetch plot details
@@ -18,17 +30,17 @@ const AddEnquiry = () => {
     <>
       <h2> Add Enquiry for Plot No. {params.id} </h2>;
       <Form
+        form={form}
         name="enquiryForm"
         initialValues={{
-          plotID: params.id,
+          plotId: params.id,
           plotDirection: "North",
           plotSize: "100 sq. ft.",
-          plotPrice: "Rs. 100,000",
         }}
         onFinish={onFinish}
         layout="vertical"
       >
-        <Form.Item label="Plot ID" name="plotID">
+        <Form.Item label="Plot ID" name="plotId">
           <Input disabled />
         </Form.Item>
 
@@ -40,8 +52,17 @@ const AddEnquiry = () => {
           <Input disabled />
         </Form.Item>
 
-        <Form.Item label="Plot Price" name="plotPrice">
-          <Input disabled />
+        <Form.Item
+          label="Plot Price"
+          rules={[
+            {
+              required: true,
+              message: "Please input the price of the plot!",
+            },
+          ]}
+          name="plotPrice"
+        >
+          <Input />
         </Form.Item>
         <Form.Item
           label="User Name"

@@ -1,15 +1,24 @@
 import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import { Space, Table, Button, Modal, Flex } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllEnquiries } from "../store/actions/enquiryActions";
 import { useNavigate } from "react-router-dom";
 import PlotsLayoutModal from "../components/PlotsLayoutModal";
 
 const Enquiries = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDetailsModalOpen, setIsDetailsModalOpen] = useState(false);
   const [modalDetails, setModalDetails] = useState(null);
   const navigateTo = useNavigate();
+  const dispatch = useDispatch();
+
+  const isLoading = useSelector((state) => state.enquiry.isLoading);
+  const allEnquiries = useSelector((state) => state.enquiry.allEnquiries);
+
+  useEffect(() => {
+    dispatch(getAllEnquiries());
+  }, []);
 
   const openDetails = (data) => {
     setIsDetailsModalOpen(true);
@@ -46,65 +55,14 @@ const Enquiries = () => {
     },
     {
       title: "Ph No.",
-      dataIndex: "userNumber",
-      key: "userNumber",
-      align: "center",
-    },
-    {
-      title: "Status",
-      dataIndex: "userStatus",
-      key: "userStatus",
+      dataIndex: "userPhoneNumber",
+      key: "userPhoneNumber",
       align: "center",
     },
     {
       title: "Actions",
       render: renderActions,
       align: "center",
-    },
-  ];
-
-  const data = [
-    {
-      key: 1,
-      plotId: "001",
-      userName: "Samuel Ortega",
-      userNumber: 1233457788,
-      userStatus: "Phase 1",
-    },
-    {
-      key: 2,
-      plotId: "002",
-      userName: "Samuel Ortega",
-      userNumber: 1233457788,
-      userStatus: "Phase 2",
-    },
-    {
-      key: 3,
-      plotId: "003",
-      userName: "Samuel Ortega",
-      userNumber: 1233457788,
-      userStatus: "Phase 1",
-    },
-    {
-      key: 4,
-      plotId: "111",
-      userName: "Samuel Ortega",
-      userNumber: 1233457788,
-      userStatus: "Phase 1",
-    },
-    {
-      key: 5,
-      plotId: "123",
-      userName: "Samuel Ortega",
-      userNumber: 1233457788,
-      userStatus: "Phase 6",
-    },
-    {
-      key: 6,
-      plotId: "088",
-      userName: "Samuel Ortega",
-      userNumber: 1233457788,
-      userStatus: "Phase 2",
     },
   ];
 
@@ -117,7 +75,7 @@ const Enquiries = () => {
       >
         Add Enquiry
       </Button>
-      <Table columns={columns} dataSource={data} />
+      <Table loading={isLoading} columns={columns} dataSource={allEnquiries} />
       <PlotsLayoutModal
         title="Plots Layout"
         show={isModalOpen}
