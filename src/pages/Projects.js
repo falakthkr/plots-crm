@@ -1,11 +1,8 @@
 import React from "react";
 import { Form, Select } from "antd";
-import { useDispatch } from "react-redux";
-import { userLogin } from "../store/actions/authActions";
 import { useNavigate } from "react-router-dom";
 
 const Projects = () => {
-  const { Option } = Select;
   // const dispatch = useDispatch();
   const navigateTo = useNavigate();
   const [form] = Form.useForm();

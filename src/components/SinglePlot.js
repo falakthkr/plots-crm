@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Button } from "antd";
 import { useNavigate } from "react-router-dom";
 
@@ -17,7 +17,6 @@ const SinglePlot = ({
     height: "45px",
   });
   /** states */
-  const [pingCount, setPingCount] = useState(0);
 
   const handleClick = () => {
     if (status === "booked") return null;
@@ -34,7 +33,6 @@ const SinglePlot = ({
         width: "62px",
         height: "45px",
       };
-      // setPingCount((prev) => prev + 1);
     }
     if (typeTwo) {
       plotStyling.current = {
@@ -42,7 +40,6 @@ const SinglePlot = ({
         width: "50px",
         height: "50px",
       };
-      // setPingCount((prev) => prev + 1);
     }
     if (typeThree) {
       plotStyling.current = {
@@ -50,7 +47,6 @@ const SinglePlot = ({
         width: "50px",
         height: "50px",
       };
-      // setPingCount((prev) => prev + 1);
     }
     if (typeFour) {
       plotStyling.current = {
@@ -58,7 +54,6 @@ const SinglePlot = ({
         width: "50px",
         height: "50px",
       };
-      // setPingCount((prev) => prev + 1);
     }
     if (garden) {
       plotStyling.current = {
@@ -67,9 +62,8 @@ const SinglePlot = ({
         height: "495px",
         fontSize: "large",
       };
-      // setPingCount((prev) => prev + 1);
     }
-  }, [garden, pingCount, typeFour, typeOne, typeThree, typeTwo]);
+  }, [garden, typeFour, typeOne, typeThree, typeTwo]);
 
   return (
     <>
