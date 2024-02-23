@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Layout, Card, Form, Input, Button, Avatar, message } from "antd";
+import { Layout, Card, Form, Input, Avatar, message } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import axios from "axios";
 
@@ -30,14 +30,14 @@ const UserProfile = () => {
     fetchUserProfile();
   }, []);
 
-  const handleEditClick = () => {
-    setEditMode(true);
-  };
+  // const handleEditClick = () => {
+  //   setEditMode(true);
+  // };
 
-  const handleCancelEdit = () => {
-    form.resetFields();
-    setEditMode(false);
-  };
+  // const handleCancelEdit = () => {
+  //   form.resetFields();
+  //   setEditMode(false);
+  // };
 
   const handleSave = async (values) => {
     try {
@@ -117,26 +117,6 @@ const UserProfile = () => {
                 >
                   <Input disabled={!editMode} />
                 </Form.Item>
-
-                {editMode ? (
-                  <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                      Save
-                    </Button>
-                    <Button
-                      style={{ marginLeft: 8 }}
-                      onClick={handleCancelEdit}
-                    >
-                      Cancel
-                    </Button>
-                  </Form.Item>
-                ) : (
-                  <Form.Item>
-                    <Button type="primary" onClick={handleEditClick}>
-                      Edit Profile
-                    </Button>
-                  </Form.Item>
-                )}
               </Form>
             </>
           )}

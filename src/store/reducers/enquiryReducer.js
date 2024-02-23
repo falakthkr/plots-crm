@@ -5,6 +5,9 @@ import {
   GET_ALL_ENQUIRIES_SUCCESS,
   GET_ALL_ENQUIRIES_FAILURE,
   GET_ALL_ENQUIRIES_PENDING,
+  DELETE_ENQUIRY_FAILURE,
+  DELETE_ENQUIRY_PENDING,
+  DELETE_ENQUIRY_SUCCESS,
 } from "../actionTypes.js/enquiryActionTypes";
 
 const initialState = {
@@ -51,6 +54,24 @@ const enquiryReducer = (state = initialState, action) => {
         allEnquiries: action.payload.data,
         isError: false,
         isLoading: false,
+      };
+    case DELETE_ENQUIRY_FAILURE:
+      return {
+        ...state,
+        isError: true,
+        isLoading: false,
+      };
+    case DELETE_ENQUIRY_PENDING:
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    case DELETE_ENQUIRY_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
       };
     default:
       return state;

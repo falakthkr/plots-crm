@@ -7,6 +7,9 @@ import {
   GET_ALL_ENQUIRIES_SUCCESS,
   GET_ALL_ENQUIRIES_FAILURE,
   GET_ALL_ENQUIRIES_PENDING,
+  DELETE_ENQUIRY_FAILURE,
+  DELETE_ENQUIRY_SUCCESS,
+  DELETE_ENQUIRY_PENDING,
 } from "../actionTypes.js/enquiryActionTypes";
 
 const addEnquirySuccess = (payload) => (dispatch) => {
@@ -77,5 +80,40 @@ export const getAllEnquiries = () => async (dispatch) => {
     }
   } catch (error) {
     dispatch(getAllEnquiriesFailure(error));
+  }
+};
+
+const deleteEnquiryPending = (payload) => (dispatch) => {
+  dispatch({
+    type: DELETE_ENQUIRY_PENDING,
+    payload,
+  });
+};
+
+const deleteEnquiryFailure = (payload) => (dispatch) => {
+  dispatch({
+    type: DELETE_ENQUIRY_FAILURE,
+    payload,
+  });
+};
+
+const deleteEnquirySuccess = (payload) => (dispatch) => {
+  dispatch({
+    type: DELETE_ENQUIRY_SUCCESS,
+    payload,
+  });
+};
+
+export const deleteEnquiry = (id) => async (dispatch) => {
+  dispatch(deleteEnquiryPending());
+  try {
+    const response = await axios.delete(
+      `https://plots-crm-backend.vercel.app/api/enquiry/${id}`
+    );
+    if (response.status === 200) {
+      dispatch(deleteEnquirySuccess(response));
+    }
+  } catch (error) {
+    dispatch(deleteEnquiryFailure(error));
   }
 };

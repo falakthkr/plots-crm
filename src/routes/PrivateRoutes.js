@@ -7,10 +7,11 @@ import Bookings from "../pages/Booking";
 import AddUser from "../components/AddUser";
 import ListUsers from "../components/ListUsers";
 import PlotDetails from "../pages/PlotDetails";
-import ViewAllPlots from "../pages/ViewAllPlots";
+// import ViewAllPlots from "../pages/ViewAllPlots";
 import Enquiries from "../pages/Enquiries";
 import AddEnquiry from "../pages/AddEnquiry";
 import Projects from "../pages/Projects";
+import EditBooking from "../pages/EditBooking";
 
 const PrivateRoutes = () => {
   return (
@@ -26,6 +27,7 @@ const PrivateRoutes = () => {
       <Route path="/plots" Component={Plots} />
       <Route path="/enquiries" Component={Enquiries} />
       <Route path="/add-enquiry/:id" Component={AddEnquiry} />
+      <Route path="/new-booking" Component={EditBooking} />
     </Routes>
   );
 };

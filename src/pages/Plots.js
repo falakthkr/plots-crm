@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Space, message, Tag } from "antd";
-import { EditOutlined, EyeOutlined } from "@ant-design/icons";
+import { Table, message, Tag } from "antd";
 
 const Plots = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,14 +27,14 @@ const Plots = () => {
     fetchAllPlots();
   });
 
-  const renderActions = (data) => {
-    return (
-      <Space size="middle">
-        <EyeOutlined style={{ color: "green" }} />
-        <EditOutlined style={{ color: "blue" }} />
-      </Space>
-    );
-  };
+  // const renderActions = (data) => {
+  //   return (
+  //     <Space size="middle">
+  //       <EyeOutlined style={{ color: "green" }} />
+  //       <EditOutlined style={{ color: "blue" }} />
+  //     </Space>
+  //   );
+  // };
 
   const columns = [
     {
@@ -92,13 +91,13 @@ const Plots = () => {
       key: "roadSize",
       align: "center",
     },
-    {
-      title: "Actions",
-      dataIndex: "actions",
-      key: "actions",
-      align: "center",
-      render: renderActions,
-    },
+    // {
+    //   title: "Actions",
+    //   dataIndex: "actions",
+    //   key: "actions",
+    //   align: "center",
+    //   render: renderActions,
+    // },
   ];
 
   return <Table loading={isLoading} columns={columns} dataSource={plotsData} />;

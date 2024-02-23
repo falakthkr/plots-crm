@@ -45,30 +45,6 @@ const EnquiryForm = () => {
       name="enquiry-form"
       onFinish={onFinish}
     >
-      {/* <Form.Item
-        name="plotId"
-        label="Plot ID"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      >
-        <Select
-          showSearch
-          optionFilterProp="children"
-          loading={isLoading}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          {enquiries.map((enquiry) => (
-            <Option key={enquiry.plotId} value={enquiry.plotId}>
-              {enquiry.plotId}
-            </Option>
-          ))}
-        </Select>
-      </Form.Item> */}
       <Form.Item
         name="plotId"
         label="Plot ID"

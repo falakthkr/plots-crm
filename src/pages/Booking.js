@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 
 const Bookings = () => {
   const [enquiries, setEnquiries] = useState([]);
@@ -9,7 +9,7 @@ const Bookings = () => {
     const fetchEnquiries = async () => {
       try {
         const response = await fetch(
-          "https://plots-crm-backend.vercel.app/api/plots/all-enquiries"
+          "https://plots-crm-backend.vercel.app/api/enquiry/all-bookings"
         );
         if (response.ok) {
           const data = await response.json();
@@ -33,40 +33,45 @@ const Bookings = () => {
       align: "center",
     },
     {
-      title: "User Details",
-      dataIndex: "userDetails",
-      key: "userDetails",
+      title: "User Name",
+      dataIndex: "userName",
+      key: "userName",
+      align: "center",
+    },
+    {
+      title: "User Ph No.",
+      dataIndex: "userPhoneNumber",
+      key: "userPhoneNumber",
       align: "center",
     },
     {
       title: "Plot Directions",
-      dataIndex: "plotDirections",
-      key: "plotDirections",
+      dataIndex: "plotDirection",
+      key: "plotDirection",
       align: "center",
     },
     {
       title: "Is Corner Plot",
-      dataIndex: "isCornerPlot",
-      key: "isCornerPlot",
-      render: (text, record) => (text ? "Yes" : "No"),
+      dataIndex: "isCorner",
+      key: "isCorner",
+      render: (text) => {
+        if (text) {
+          return <Tag color="blue">Yes</Tag>;
+        }
+        return <Tag color="red">No</Tag>;
+      },
       align: "center",
     },
     {
-      title: "Payment Method",
-      dataIndex: "paymentMethod",
-      key: "paymentMethod",
+      title: "Method of Payment",
+      dataIndex: "methodOfPayment",
+      key: "methodOfPayment",
       align: "center",
     },
     {
-      title: "Pending Payment",
-      dataIndex: "pendingPayment",
-      key: "pendingPayment",
-      align: "center",
-    },
-    {
-      title: "Status",
-      dataIndex: "status",
-      key: "status",
+      title: "Price paid",
+      dataIndex: "pricePaid",
+      key: "pricePaid",
       align: "center",
     },
   ];
