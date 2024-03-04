@@ -120,9 +120,9 @@ const PaymentsTable = ({ bookingData }) => {
       );
       setTableData(response.data.payments);
       let amount = 0;
-      await response.data.payments.map((item) => {
-        amount = amount + item.amount;
-      });
+      await response.data.payments.map(
+        (item) => (amount = amount + item.amount)
+      );
       setAmountPercentage(
         parseFloat((amount / bookingData?.plotPrice) * 100).toFixed(2)
       );
@@ -136,7 +136,7 @@ const PaymentsTable = ({ bookingData }) => {
   };
   useEffect(() => {
     getAllPaymentsData();
-  }, []);
+  }, [getAllPaymentsData]);
   const onFinish = (data) => {
     axios
       .post(
@@ -225,7 +225,6 @@ const PaymentsTable = ({ bookingData }) => {
 };
 
 const EditBooking = () => {
-  const [form] = Form.useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [bookingData, setBookingData] = useState();
   const [paymentsData, setPaymentsData] = useState();
@@ -233,6 +232,7 @@ const EditBooking = () => {
   const params = useParams();
 
   useEffect(() => {
+    console.log(isLoading, pingCount);
     const fetchBookingData = async () => {
       try {
         const response = await fetch(
@@ -251,7 +251,7 @@ const EditBooking = () => {
       }
     };
     fetchBookingData();
-  }, []);
+  }, [params.id]);
   return (
     <>
       <BookingCard bookingData={bookingData} />

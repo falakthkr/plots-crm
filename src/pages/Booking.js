@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Table, Tag } from "antd";
+import { Button, Table, Tag } from "antd";
 import { useNavigate } from "react-router-dom";
 
 const Bookings = () => {
@@ -87,7 +87,15 @@ const Bookings = () => {
     {
       title: "Actions",
       render: (record) => {
-        return <a onClick={() => handleEditBooking(record)}>Edit</a>;
+        return (
+          <Button
+            type="text"
+            style={{ color: "blue" }}
+            onClick={() => handleEditBooking(record)}
+          >
+            Edit
+          </Button>
+        );
       },
       align: "center",
     },

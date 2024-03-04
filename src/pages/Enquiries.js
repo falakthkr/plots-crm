@@ -26,7 +26,15 @@ const Enquiries = () => {
   };
 
   const renderActions = (data) => {
-    return <a onClick={() => openDetails(data)}>View</a>;
+    return (
+      <Button
+        type="text"
+        style={{ color: "blue" }}
+        onClick={() => openDetails(data)}
+      >
+        View
+      </Button>
+    );
   };
 
   const togglePlotsModal = () => {

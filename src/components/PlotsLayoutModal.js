@@ -9,7 +9,7 @@ const PlotsLayout = () => {
   const loading = useSelector((state) => state.plots.isLoading);
   useEffect(() => {
     dispatch(getBookedSlots());
-  }, []);
+  }, [dispatch]);
   if (loading) {
     return <Spin />;
   }
