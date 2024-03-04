@@ -132,7 +132,7 @@ const PaymentsTable = ({ bookingData }) => {
     } finally {
       setIsLoading(false);
     }
-  }, [bookingData]);
+  }, [bookingData, params.id]);
 
   useEffect(() => {
     getAllPaymentsData();
@@ -251,7 +251,7 @@ const EditBooking = () => {
       }
     };
     fetchBookingData();
-  }, [params.id]);
+  }, [params.id, isLoading, pingCount]);
   return (
     <>
       <BookingCard bookingData={bookingData} />
