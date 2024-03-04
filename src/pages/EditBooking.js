@@ -15,7 +15,7 @@ import {
 } from "antd";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 const BookingCard = ({ bookingData }) => {
   return (
@@ -112,15 +112,14 @@ const PaymentsTable = ({ bookingData }) => {
       align: "center",
     },
   ];
-  const getAllPaymentsData = async () => {
+  const getAllPaymentsData = useCallback(async () => {
     try {
-      // Replace "user@example.com" with the actual email you want to use
       const response = await axios.get(
         `https://plots-crm-backend.vercel.app/api/enquiry/booking/${params.id}/payments`
       );
       setTableData(response.data.payments);
       let amount = 0;
-      await response.data.payments.map(
+      await response.data.payments.forEach(
         (item) => (amount = amount + item.amount)
       );
       setAmountPercentage(
@@ -133,7 +132,8 @@ const PaymentsTable = ({ bookingData }) => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [bookingData]);
+
   useEffect(() => {
     getAllPaymentsData();
   }, [getAllPaymentsData]);
