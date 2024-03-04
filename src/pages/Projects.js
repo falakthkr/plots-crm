@@ -8,7 +8,7 @@ const Projects = () => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    navigateTo("/");
+    navigateTo("/plots");
   };
 
   return (

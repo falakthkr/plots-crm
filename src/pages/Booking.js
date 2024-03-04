@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Table, Tag } from "antd";
+import { useNavigate } from "react-router-dom";
 
 const Bookings = () => {
   const [enquiries, setEnquiries] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const navigateTo = useNavigate();
 
   useEffect(() => {
-    const fetchEnquiries = async () => {
+    const fetchBookings = async () => {
       try {
         const response = await fetch(
           "https://plots-crm-backend.vercel.app/api/enquiry/all-bookings"
@@ -22,8 +24,12 @@ const Bookings = () => {
       }
     };
 
-    fetchEnquiries();
+    fetchBookings();
   }, []);
+
+  const handleEditBooking = (data) => {
+    navigateTo(`/edit-booking/${data._id}`);
+  };
 
   const columns = [
     {
@@ -37,12 +43,28 @@ const Bookings = () => {
       dataIndex: "userName",
       key: "userName",
       align: "center",
+      filters: enquiries?.map((item) => {
+        return {
+          text: item.userName,
+          value: item.userName,
+        };
+      }),
+      onFilter: (value, record) => record.userName === value,
+      filterSearch: true,
     },
     {
       title: "User Ph No.",
       dataIndex: "userPhoneNumber",
       key: "userPhoneNumber",
       align: "center",
+      filters: enquiries?.map((item) => {
+        return {
+          text: item.userPhoneNumber,
+          value: item.userPhoneNumber,
+        };
+      }),
+      onFilter: (value, record) => record.userPhoneNumber === value,
+      filterSearch: true,
     },
     {
       title: "Plot Directions",
@@ -63,15 +85,10 @@ const Bookings = () => {
       align: "center",
     },
     {
-      title: "Method of Payment",
-      dataIndex: "methodOfPayment",
-      key: "methodOfPayment",
-      align: "center",
-    },
-    {
-      title: "Price paid",
-      dataIndex: "pricePaid",
-      key: "pricePaid",
+      title: "Actions",
+      render: (record) => {
+        return <a onClick={() => handleEditBooking(record)}>Edit</a>;
+      },
       align: "center",
     },
   ];

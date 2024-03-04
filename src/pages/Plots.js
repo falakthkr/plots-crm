@@ -48,6 +48,16 @@ const Plots = () => {
       dataIndex: "plotId",
       key: "plotId",
       align: "center",
+      filters: plotsData?.map((item) => {
+        return {
+          text: item.plotId,
+          value: item.plotId,
+        };
+      }),
+      onFilter: (value, record) => record.plotId === value,
+      filterSearch: true,
+      sorter: (a, b) => a.plotId - b.plotId,
+      sortDirections: ["ascend"],
     },
     {
       title: "Plot Size",

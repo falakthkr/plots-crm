@@ -8,7 +8,7 @@ import {
   DELETE_ENQUIRY_FAILURE,
   DELETE_ENQUIRY_PENDING,
   DELETE_ENQUIRY_SUCCESS,
-} from "../actionTypes.js/enquiryActionTypes";
+} from "../actionTypes/enquiryActionTypes";
 
 const initialState = {
   isLoading: false,

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Row, Col, Table, Card } from "antd";
+import { Row, Col, Table, Card, Divider } from "antd";
 
 const EnquiryTable = ({ enquiries, onSelectEnquiry }) => {
   const columns = [
@@ -64,7 +64,7 @@ const PlotDetails = () => {
   return (
     <>
       <h1>Plot ID: {params.id}</h1>
-      <hr />
+      <Divider />
       <Row gutter={16}>
         <Col span={8}>
           <EnquiryTable

@@ -48,6 +48,14 @@ const ListUsers = () => {
       dataIndex: "fullName",
       key: "fullName",
       align: "center",
+      filters: users?.map((item) => {
+        return {
+          text: item.fullName,
+          value: item.fullName,
+        };
+      }),
+      onFilter: (value, record) => record.fullName === value,
+      filterSearch: true,
     },
     {
       title: "Phone Number",

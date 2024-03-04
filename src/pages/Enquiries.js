@@ -26,7 +26,7 @@ const Enquiries = () => {
   };
 
   const renderActions = (data) => {
-    return <Button onClick={() => openDetails(data)}>View</Button>;
+    return <a onClick={() => openDetails(data)}>View</a>;
   };
 
   const togglePlotsModal = () => {
@@ -58,7 +58,10 @@ const Enquiries = () => {
   };
 
   const transferToBookings = (data) => {
-    localStorage.setItem("transferToBooking", JSON.stringify(data));
+    localStorage.setItem(
+      "transferToBooking",
+      JSON.stringify({ ...data, status: "booked" })
+    );
     navigateTo("/new-booking");
   };
 
@@ -68,12 +71,28 @@ const Enquiries = () => {
       dataIndex: "plotId",
       key: "plotId",
       align: "center",
+      filters: allEnquiries?.map((item) => {
+        return {
+          text: item.plotId,
+          value: item.plotId,
+        };
+      }),
+      onFilter: (value, record) => record.plotId === value,
+      filterSearch: true,
     },
     {
       title: "Name",
       dataIndex: "userName",
       key: "userName",
       align: "center",
+      filters: allEnquiries?.map((item) => {
+        return {
+          text: item.userName,
+          value: item.userName,
+        };
+      }),
+      onFilter: (value, record) => record.userName === value,
+      filterSearch: true,
     },
     {
       title: "Ph No.",
@@ -109,24 +128,21 @@ const Enquiries = () => {
         open={isDetailsModalOpen}
         footer={null}
       >
-        <Flex vertical gap="large">
-          <Flex gap="small" vertical>
+        {/* <Flex vertical gap="large"> */}
+        {/* <Flex gap="small" vertical>
             <div>Plot ID: {modalDetails?.plotId}</div>
             <div>User name: {modalDetails?.userName}</div>
             <div>User number: {modalDetails?.userNumber}</div>
-          </Flex>
-          <Flex justify="end" gap="large" horizontal>
-            <Button
-              onClick={() => handleDeleteEnquiry(modalDetails?._id)}
-              danger
-            >
-              Delete Enquiry
-            </Button>
-            <Button onClick={() => transferToBookings(modalDetails)}>
-              Transfer user to bookings
-            </Button>
-          </Flex>
+          </Flex> */}
+        <Flex justify="center" gap="large" horizontal>
+          <Button onClick={() => handleDeleteEnquiry(modalDetails?._id)} danger>
+            Delete Enquiry
+          </Button>
+          <Button onClick={() => transferToBookings(modalDetails)}>
+            Transfer user to bookings
+          </Button>
         </Flex>
+        {/* </Flex> */}
       </Modal>
     </>
   );

@@ -4,7 +4,7 @@ import {
   USER_LOGIN_FAILURE,
   USER_LOGIN_PENDING,
   USER_LOGIN_SUCCESS,
-} from "../actionTypes.js/authActionTypes";
+} from "../actionTypes/authActionTypes";
 
 const userLoginSuccess = (payload) => (dispatch) => {
   dispatch({

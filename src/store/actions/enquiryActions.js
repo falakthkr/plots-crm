@@ -10,7 +10,7 @@ import {
   DELETE_ENQUIRY_FAILURE,
   DELETE_ENQUIRY_SUCCESS,
   DELETE_ENQUIRY_PENDING,
-} from "../actionTypes.js/enquiryActionTypes";
+} from "../actionTypes/enquiryActionTypes";
 
 const addEnquirySuccess = (payload) => (dispatch) => {
   dispatch({
@@ -38,7 +38,7 @@ export const addEnquiryCall = (data) => async (dispatch) => {
   try {
     const response = await axios.post(
       "https://plots-crm-backend.vercel.app/api/enquiry/add-enquiry",
-      data
+      { ...data, status: "inEnquiry" }
     );
     if (response.data) {
       dispatch(addEnquirySuccess(response));

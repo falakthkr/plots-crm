@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
-  DesktopOutlined,
   FileOutlined,
   TeamOutlined,
   UserOutlined,
@@ -59,7 +58,7 @@ const AppLayout = ({ children }) => {
   const { Content, Footer, Sider } = Layout;
 
   const items = [
-    getItem("Dashboard", <DesktopOutlined />, "/"),
+    // getItem("Dashboard", <DesktopOutlined />, "/"),
     // getItem("Projects", <HomeOutlined />, "/projects"),
     getItem("Plots", <AppstoreOutlined />, "/plots"),
     getItem("Bookings", <FileOutlined />, "/bookings"),

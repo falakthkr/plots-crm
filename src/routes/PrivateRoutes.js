@@ -11,6 +11,7 @@ import PlotDetails from "../pages/PlotDetails";
 import Enquiries from "../pages/Enquiries";
 import AddEnquiry from "../pages/AddEnquiry";
 import Projects from "../pages/Projects";
+import NewBooking from "../pages/NewBooking";
 import EditBooking from "../pages/EditBooking";
 
 const PrivateRoutes = () => {
@@ -27,7 +28,8 @@ const PrivateRoutes = () => {
       <Route path="/plots" Component={Plots} />
       <Route path="/enquiries" Component={Enquiries} />
       <Route path="/add-enquiry/:id" Component={AddEnquiry} />
-      <Route path="/new-booking" Component={EditBooking} />
+      <Route path="/new-booking" Component={NewBooking} />
+      <Route path="/edit-booking/:id" Component={EditBooking} />
     </Routes>
   );
 };

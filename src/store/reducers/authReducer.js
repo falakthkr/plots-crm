@@ -2,7 +2,7 @@ import {
   USER_LOGIN_SUCCESS,
   USER_LOGIN_FAILURE,
   USER_LOGIN_PENDING,
-} from "../actionTypes.js/authActionTypes";
+} from "../actionTypes/authActionTypes";
 
 const initialState = {
   isAuth: true,
