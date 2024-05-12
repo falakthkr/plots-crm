@@ -13,7 +13,7 @@ const Login = () => {
   const onFinish = async (values) => {
     try {
       const response = await dispatch(userLogin(values));
-      if (response && response.data.token) {
+      if (response.data && response.data.token) {
         localStorage.setItem("authToken", response.data.token);
         localStorage.setItem("userEmail", response.data.email);
         localStorage.setItem("role", response.data.role);

@@ -35,6 +35,7 @@ export const userLogin = (credentials) => async (dispatch) => {
     );
     if (response.data.token) {
       dispatch(userLoginSuccess(response));
+      return response;
     }
   } catch (error) {
     dispatch(userLoginFailure(error));

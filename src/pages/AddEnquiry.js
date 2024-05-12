@@ -28,7 +28,7 @@ const AddEnquiry = () => {
   const params = useParams();
   return (
     <>
-      <h2> Add Enquiry for Plot No. {params.id} </h2>;
+      <h2> Add Enquiry for Plot No. {params.id} </h2>
       <Form
         form={form}
         name="enquiryForm"

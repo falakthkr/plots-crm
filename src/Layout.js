@@ -8,6 +8,8 @@ import {
   AppstoreOutlined,
   LogoutOutlined,
   FormOutlined,
+  SwapOutlined,
+  DesktopOutlined,
 } from "@ant-design/icons";
 import { logoutUser } from "./store/actions/authActions";
 import { Breadcrumb, Layout, Menu, theme, message } from "antd";
@@ -28,6 +30,10 @@ const AppLayout = ({ children }) => {
 
   const handleRedirect = (route) => {
     navigateTo(route);
+  };
+
+  const handleSwitch = () => {
+    handleRedirect("/select-project");
   };
 
   const handleLogout = async () => {
@@ -58,7 +64,7 @@ const AppLayout = ({ children }) => {
   const { Content, Footer, Sider } = Layout;
 
   const items = [
-    // getItem("Dashboard", <DesktopOutlined />, "/"),
+    getItem("Dashboard", <DesktopOutlined />, "/"),
     // getItem("Projects", <HomeOutlined />, "/projects"),
     getItem("Plots", <AppstoreOutlined />, "/plots"),
     getItem("Bookings", <FileOutlined />, "/bookings"),
@@ -154,6 +160,19 @@ const AppLayout = ({ children }) => {
           items={items}
           onSelect={(item) => handleRedirect(item.key)}
         />
+        <div
+          style={{
+            position: "absolute",
+            bottom: 70,
+            left: 50,
+            cursor: "pointer",
+            color: "white",
+          }}
+          onClick={handleSwitch}
+        >
+          <SwapOutlined style={{ marginRight: 8 }} />
+          Switch project
+        </div>
         <div
           style={{
             position: "absolute",

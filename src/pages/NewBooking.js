@@ -1,12 +1,17 @@
-import { Form, Input, Button, message } from "antd";
+import { Form, Input, Button, message, Select } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
 
 const { TextArea } = Input;
 
 const NewBooking = () => {
+  const { Option } = Select;
   const [form] = Form.useForm();
   const navigateTo = useNavigate();
+
+  const [paymentOption, setPaymentOption] = useState("");
+  const [emiOption, setEmiOption] = useState("");
 
   const bookingData = JSON.parse(localStorage.getItem("transferToBooking"));
 
@@ -14,7 +19,13 @@ const NewBooking = () => {
     try {
       const response = await axios.post(
         `https://plots-crm-backend.vercel.app/api/enquiry/transfer`,
-        { ...values, id: bookingData._id, status: "booked" }
+        {
+          ...values,
+          id: bookingData._id,
+          status: "booked",
+          paymentOption,
+          emiOption,
+        }
       );
       if (response.status === 200) {
         message.success("Booking added successfully!");
@@ -25,6 +36,13 @@ const NewBooking = () => {
       console.log(error);
       message.error("Failed to add booking");
     }
+  };
+
+  const handlePaymentOptionChange = (value) => {
+    setPaymentOption(value);
+  };
+  const handleEmiOptionChange = (value) => {
+    setEmiOption(value);
   };
   return (
     <>
@@ -87,6 +105,32 @@ const NewBooking = () => {
         <Form.Item label="User email ID" name="userEmail">
           <Input disabled />
         </Form.Item>
+
+        <Form.Item
+          label="Payment Option"
+          name="paymentOption"
+          rules={[
+            {
+              required: true,
+              message: "Please select payment option!",
+            },
+          ]}
+        >
+          <Select onChange={handlePaymentOptionChange}>
+            <Option value="upfront">Upfront Payment</Option>
+            <Option value="emi">EMI Options</Option>
+          </Select>
+        </Form.Item>
+        {paymentOption === "emi" && (
+          <Form.Item label="EMI Tenure (Years)" name="emiOption">
+            <Select onChange={handleEmiOptionChange}>
+              <Option value="oneYear">1 year</Option>
+              <Option value="twoYears">2 years</Option>
+              <Option value="threeYears">3 years</Option>
+              <Option value="fourYears">4 years</Option>
+            </Select>
+          </Form.Item>
+        )}
 
         <Form.Item>
           <Button type="primary" htmlType="submit">

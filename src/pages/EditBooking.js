@@ -111,6 +111,12 @@ const PaymentsTable = ({ bookingData }) => {
       key: "amount",
       align: "center",
     },
+    {
+      title: "Remarks",
+      dataIndex: "remarks",
+      key: "remarks",
+      align: "center",
+    },
   ];
   const getAllPaymentsData = useCallback(async () => {
     try {
@@ -160,6 +166,7 @@ const PaymentsTable = ({ bookingData }) => {
     <>
       <Card title="Edit Payment Details">
         <p>Pending: Rs. {bookingData?.plotPrice - paidAmount}</p>
+        <p>Duration: Rs. 1 year</p>
         <Progress percent={amountPercentage} />
         <Button
           onClick={() => setOpenPaymentModal(true)}
@@ -212,6 +219,13 @@ const PaymentsTable = ({ bookingData }) => {
             ]}
           >
             <DatePicker style={{ width: "100%" }} />
+          </Form.Item>
+          <Form.Item
+            label="Remarks"
+            name="remarks"
+            rules={[{ required: true, message: "Please enter Remarks" }]}
+          >
+            <Input />
           </Form.Item>
           <Form.Item>
             <Button style={{ float: "right" }} type="primary" htmlType="submit">

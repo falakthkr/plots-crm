@@ -8,10 +8,6 @@ const SinglePlot = ({ value, garden }) => {
   const loading = useSelector((state) => state.plots.isLoading);
 
   const navigateTo = useNavigate();
-  const plotStyling = useRef({
-    width: "62px",
-    height: "45px",
-  });
 
   /** states */
   const handleClick = () => {
@@ -30,7 +26,12 @@ const SinglePlot = ({ value, garden }) => {
         onClick={handleClick}
         danger={bookedPlots.includes(value)}
         // disabled={bookedPlots.includes(value)}
-        style={plotStyling.current}
+        style={{
+          width: "62px",
+          height: "45px",
+          backgroundColor: `${bookedPlots.includes(value) ? "red" : "white"}`,
+          color: `${bookedPlots.includes(value) ? "white" : "black"}`,
+        }}
       >
         {garden ? "Open Space/Garden" : value}
       </Button>
