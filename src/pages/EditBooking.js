@@ -166,7 +166,7 @@ const PaymentsTable = ({ bookingData }) => {
     <>
       <Card title="Edit Payment Details">
         <p>Pending: Rs. {bookingData?.plotPrice - paidAmount}</p>
-        <p>Duration: Rs. 1 year</p>
+        <p>Duration: 4 years</p>
         <Progress percent={amountPercentage} />
         <Button
           onClick={() => setOpenPaymentModal(true)}

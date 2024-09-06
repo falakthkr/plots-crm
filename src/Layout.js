@@ -218,7 +218,8 @@ const AppLayout = ({ children }) => {
           textAlign: "center",
         }}
       >
-        Wali Developers Plot Management System ©2023 Created by Falak Thackar
+        Wali Developers Plot Management System ©2023 Created by Aller
+        Technologies
       </Footer>
     );
   };
