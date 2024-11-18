@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { Button, message } from "antd";
+import React from "react";
+import { Button, message, Tooltip } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -9,7 +9,7 @@ const SinglePlot = ({ value, garden }) => {
 
   const navigateTo = useNavigate();
 
-  /** states */
+  /** Handle button click */
   const handleClick = () => {
     if (bookedPlots.includes(value)) {
       message.error(`Plot ${value} is already booked!`);
@@ -20,22 +20,28 @@ const SinglePlot = ({ value, garden }) => {
   };
 
   if (loading) return null;
+
+  // Determine booking status
+  const isBooked = bookedPlots.includes(value);
+  const plotStatus = isBooked ? "Booked" : "Available";
+
   return (
-    <>
+    <Tooltip
+      title={garden ? "Open Space/Garden" : `Plot ${value}: ${plotStatus}`}
+    >
       <Button
         onClick={handleClick}
-        danger={bookedPlots.includes(value)}
-        // disabled={bookedPlots.includes(value)}
+        danger={isBooked}
         style={{
           width: "62px",
           height: "45px",
-          backgroundColor: `${bookedPlots.includes(value) ? "red" : "white"}`,
-          color: `${bookedPlots.includes(value) ? "white" : "black"}`,
+          backgroundColor: `${isBooked ? "red" : "white"}`,
+          color: `${isBooked ? "white" : "black"}`,
         }}
       >
         {garden ? "Open Space/Garden" : value}
       </Button>
-    </>
+    </Tooltip>
   );
 };
 

@@ -1,7 +1,7 @@
-import { Form, Input, Button, message, Select } from "antd";
+import { Form, Input, Button, message, Select, InputNumber } from "antd";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const { TextArea } = Input;
 
@@ -12,8 +12,17 @@ const NewBooking = () => {
 
   const [paymentOption, setPaymentOption] = useState("");
   const [emiOption, setEmiOption] = useState("");
+  const [bookingData, setBookingData] = useState(null);
 
-  const bookingData = JSON.parse(localStorage.getItem("transferToBooking"));
+  // Fetch booking data from local storage on component mount
+  useEffect(() => {
+    const storedData = localStorage.getItem("transferToBooking");
+    if (storedData) {
+      setBookingData(JSON.parse(storedData));
+    } else {
+      navigateTo("/bookings"); // Redirect if no booking data is found
+    }
+  }, [navigateTo]);
 
   const onFinish = async (values) => {
     try {
@@ -33,7 +42,7 @@ const NewBooking = () => {
         localStorage.removeItem("transferToBooking");
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
       message.error("Failed to add booking");
     }
   };
@@ -41,12 +50,19 @@ const NewBooking = () => {
   const handlePaymentOptionChange = (value) => {
     setPaymentOption(value);
   };
+
   const handleEmiOptionChange = (value) => {
     setEmiOption(value);
   };
+
+  // Loading state handling for bookingData
+  if (!bookingData) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
-      <h2> Add New Booking </h2>
+      <h2>Add New Booking</h2>
       <Form
         form={form}
         name="enquiryForm"
@@ -64,17 +80,15 @@ const NewBooking = () => {
         layout="vertical"
       >
         <Form.Item
-          label="Total price of pllot"
+          label="Total Price of Plot"
           name="plotPrice"
           rules={[
-            {
-              required: true,
-              message: "Please input price of plot!",
-            },
+            { required: true, message: "Please input the price of the plot!" },
           ]}
         >
-          <Input />
+          <InputNumber min={0} style={{ width: "100%" }} />
         </Form.Item>
+
         <Form.Item label="User Name" name="userName">
           <Input disabled />
         </Form.Item>
@@ -90,9 +104,6 @@ const NewBooking = () => {
         <Form.Item label="Plot Size" name="plotSize">
           <Input disabled />
         </Form.Item>
-        <Form.Item label="User Name" name="userName">
-          <Input disabled />
-        </Form.Item>
 
         <Form.Item label="User Phone Number" name="userPhoneNumber">
           <Input disabled />
@@ -102,7 +113,7 @@ const NewBooking = () => {
           <TextArea disabled />
         </Form.Item>
 
-        <Form.Item label="User email ID" name="userEmail">
+        <Form.Item label="User Email ID" name="userEmail">
           <Input disabled />
         </Form.Item>
 
@@ -110,10 +121,7 @@ const NewBooking = () => {
           label="Payment Option"
           name="paymentOption"
           rules={[
-            {
-              required: true,
-              message: "Please select payment option!",
-            },
+            { required: true, message: "Please select a payment option!" },
           ]}
         >
           <Select onChange={handlePaymentOptionChange}>
@@ -121,13 +129,20 @@ const NewBooking = () => {
             <Option value="emi">EMI Options</Option>
           </Select>
         </Form.Item>
+
         {paymentOption === "emi" && (
-          <Form.Item label="EMI Tenure (Years)" name="emiOption">
+          <Form.Item
+            label="EMI Tenure (Years)"
+            name="emiOption"
+            rules={[
+              { required: true, message: "Please select an EMI tenure!" },
+            ]}
+          >
             <Select onChange={handleEmiOptionChange}>
-              <Option value="oneYear">1 year</Option>
-              <Option value="twoYears">2 years</Option>
-              <Option value="threeYears">3 years</Option>
-              <Option value="fourYears">4 years</Option>
+              <Option value="oneYear">1 Year</Option>
+              <Option value="twoYears">2 Years</Option>
+              <Option value="threeYears">3 Years</Option>
+              <Option value="fourYears">4 Years</Option>
             </Select>
           </Form.Item>
         )}

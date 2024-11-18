@@ -12,6 +12,9 @@ import {
   DatePicker,
   message,
   Progress,
+  Tooltip,
+  Spin,
+  InputNumber,
 } from "antd";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -23,42 +26,44 @@ const BookingCard = ({ bookingData }) => {
       <Row gutter={[30, 30]}>
         <Col span={8}>
           <p>
-            <strong>Plot ID:</strong> {bookingData?.plotId}
+            <strong>Plot ID:</strong> {bookingData?.plotId || "N/A"}
           </p>
         </Col>
         <Col span={8}>
           <p>
-            <strong>Plot Direction:</strong> {bookingData?.plotDirection}
+            <strong>Plot Direction:</strong>{" "}
+            {bookingData?.plotDirection || "N/A"}
           </p>
         </Col>
         <Col span={8}>
           <p>
-            <strong>Plot Size:</strong> {bookingData?.plotSize}
+            <strong>Plot Size:</strong> {bookingData?.plotSize || "N/A"}
           </p>
         </Col>
         <Col span={8}>
           <p>
-            <strong>Plot Price:</strong> {bookingData?.plotPrice}
+            <strong>Plot Price:</strong> ₹{bookingData?.plotPrice || "N/A"}
           </p>
         </Col>
         <Col span={8}>
           <p>
-            <strong>User Name:</strong> {bookingData?.userName}
+            <strong>User Name:</strong> {bookingData?.userName || "N/A"}
           </p>
         </Col>
         <Col span={8}>
           <p>
-            <strong>User Email:</strong> {bookingData?.userEmail}
+            <strong>User Email:</strong> {bookingData?.userEmail || "N/A"}
           </p>
         </Col>
         <Col span={8}>
           <p>
-            <strong>User Phone Number:</strong> {bookingData?.userPhoneNumber}
+            <strong>User Phone Number:</strong>{" "}
+            {bookingData?.userPhoneNumber || "N/A"}
           </p>
         </Col>
         <Col span={8}>
           <p>
-            <strong>User Address:</strong> {bookingData?.userAddress}
+            <strong>User Address:</strong> {bookingData?.userAddress || "N/A"}
           </p>
         </Col>
       </Row>
@@ -73,17 +78,17 @@ const PaymentsTable = ({ bookingData }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [paidAmount, setPaidAmount] = useState(0);
   const [amountPercentage, setAmountPercentage] = useState(0);
+  const [isFullyPaid, setIsFullyPaid] = useState(false); // Track if payment is complete
   const [form] = Form.useForm();
   const params = useParams();
+
   const columns = [
     {
       title: "Date",
       dataIndex: "date",
       key: "date",
       align: "center",
-      render: (value) => {
-        return new Date(value).toDateString();
-      },
+      render: (value) => new Date(value).toLocaleDateString(),
     },
     {
       title: "Payment Method",
@@ -91,18 +96,13 @@ const PaymentsTable = ({ bookingData }) => {
       key: "paymentMethod",
       align: "center",
       render: (value) => {
-        if (value === "debitCard") {
-          return "Debit Card";
-        }
-        if (value === "bankTransfer") {
-          return "Bank Transfer";
-        }
-        if (value === "creditCard") {
-          return "Credit Card";
-        }
-        if (value === "cash") {
-          return "Cash";
-        }
+        const methods = {
+          debitCard: "Debit Card",
+          bankTransfer: "Bank Transfer",
+          creditCard: "Credit Card",
+          cash: "Cash",
+        };
+        return methods[value] || "Unknown";
       },
     },
     {
@@ -110,6 +110,7 @@ const PaymentsTable = ({ bookingData }) => {
       dataIndex: "amount",
       key: "amount",
       align: "center",
+      render: (amount) => `₹${amount}`,
     },
     {
       title: "Remarks",
@@ -118,20 +119,21 @@ const PaymentsTable = ({ bookingData }) => {
       align: "center",
     },
   ];
+
   const getAllPaymentsData = useCallback(async () => {
+    setIsLoading(true);
     try {
-      const response = await axios.get(
+      const { data } = await axios.get(
         `https://plots-crm-backend.vercel.app/api/enquiry/booking/${params.id}/payments`
       );
-      setTableData(response.data.payments);
-      let amount = 0;
-      await response.data.payments.forEach(
-        (item) => (amount = amount + item.amount)
-      );
+      setTableData(data.payments || []);
+      const totalPaid =
+        data.payments?.reduce((acc, curr) => acc + curr.amount, 0) || 0;
+      setPaidAmount(totalPaid);
       setAmountPercentage(
-        parseFloat((amount / bookingData?.plotPrice) * 100).toFixed(2)
+        ((totalPaid / bookingData?.plotPrice) * 100).toFixed(2)
       );
-      setPaidAmount(amount);
+      setIsFullyPaid(totalPaid >= bookingData?.plotPrice); // Check if fully paid
     } catch (error) {
       message.error("Failed to fetch payments");
       console.error(error);
@@ -143,31 +145,35 @@ const PaymentsTable = ({ bookingData }) => {
   useEffect(() => {
     getAllPaymentsData();
   }, [getAllPaymentsData]);
-  const onFinish = (data) => {
-    axios
-      .post(
+
+  const onFinish = async (data) => {
+    try {
+      const response = await axios.post(
         `https://plots-crm-backend.vercel.app/api/enquiry/booking/${params.id}/add-payment`,
         data
-      )
-      .then((res) => {
-        if (res.status === 200) {
-          message.success("Payment added successfully");
-          setOpenPaymentModal(false);
-          getAllPaymentsData();
-        }
-      })
-      .catch((err) => {
-        message.error("Failed to add payment");
+      );
+      if (response.status === 200) {
+        message.success("Payment added successfully");
         setOpenPaymentModal(false);
-        console.error(err);
-      });
+        getAllPaymentsData();
+      }
+    } catch (error) {
+      message.error("Failed to add payment");
+      console.error(error);
+    }
   };
+
   return (
     <>
       <Card title="Edit Payment Details">
-        <p>Pending: Rs. {bookingData?.plotPrice - paidAmount}</p>
-        <p>Duration: 4 years</p>
-        <Progress percent={amountPercentage} />
+        <p>Pending: ₹{bookingData?.plotPrice - paidAmount || 0}</p>
+        <Tooltip
+          title={`Paid: ₹${paidAmount}, Pending: ₹${
+            bookingData?.plotPrice - paidAmount
+          }`}
+        >
+          <Progress percent={amountPercentage} />
+        </Tooltip>
         <Button
           onClick={() => setOpenPaymentModal(true)}
           style={{ float: "right", marginBottom: "10px" }}
@@ -175,8 +181,20 @@ const PaymentsTable = ({ bookingData }) => {
         >
           Add Payment
         </Button>
-        <Table loading={isLoading} columns={columns} dataSource={tableData} />
+        <Table
+          loading={isLoading}
+          columns={columns}
+          dataSource={tableData}
+          pagination={{ pageSize: 5 }}
+        />
       </Card>
+
+      {isFullyPaid && (
+        <Card title="Registration Payment" style={{ marginTop: "20px" }}>
+          <p>Your registration payment has been completed. Thank you!</p>
+        </Card>
+      )}
+
       <Modal
         onCancel={() => setOpenPaymentModal(false)}
         footer={false}
@@ -187,15 +205,14 @@ const PaymentsTable = ({ bookingData }) => {
           form={form}
           onFinish={onFinish}
           style={{ maxWidth: "600px", margin: "auto", marginTop: "20px" }}
-          title="Add Payment"
         >
-          <h2>Add payment</h2>
+          <h2>Add Payment</h2>
           <Form.Item
             label="Amount"
             name="amount"
             rules={[{ required: true, message: "Please enter amount" }]}
           >
-            <Input />
+            <InputNumber min={1} style={{ width: "100%" }} />
           </Form.Item>
           <Form.Item
             label="Payment Method"
@@ -215,16 +232,12 @@ const PaymentsTable = ({ bookingData }) => {
             label="Date"
             name="date"
             rules={[
-              { required: true, message: "Please select date of payment" },
+              { required: true, message: "Please select the date of payment" },
             ]}
           >
             <DatePicker style={{ width: "100%" }} />
           </Form.Item>
-          <Form.Item
-            label="Remarks"
-            name="remarks"
-            rules={[{ required: true, message: "Please enter Remarks" }]}
-          >
+          <Form.Item label="Remarks" name="remarks">
             <Input />
           </Form.Item>
           <Form.Item>
@@ -239,38 +252,38 @@ const PaymentsTable = ({ bookingData }) => {
 };
 
 const EditBooking = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [bookingData, setBookingData] = useState();
-  const [paymentsData, setPaymentsData] = useState();
-  const [pingCount, setPingCount] = useState(0);
   const params = useParams();
 
   useEffect(() => {
-    console.log(isLoading, pingCount);
     const fetchBookingData = async () => {
       try {
-        const response = await fetch(
+        const { data } = await axios.get(
           `https://plots-crm-backend.vercel.app/api/enquiry/all-bookings/${params.id}`
         );
-        if (response.ok) {
-          const data = await response.json();
-          setBookingData(data);
-          setPaymentsData(data.payments);
-          setPingCount((prev) => prev + 1);
-        }
+        setBookingData(data);
       } catch (error) {
-        console.error("Error fetching Booking data");
+        message.error("Error fetching booking data");
+        console.error(error);
       } finally {
         setIsLoading(false);
       }
     };
     fetchBookingData();
-  }, [params.id, isLoading, pingCount]);
+  }, [params.id]);
+
+  if (isLoading) {
+    return (
+      <Spin style={{ display: "block", margin: "100px auto" }} size="large" />
+    );
+  }
+
   return (
     <>
       <BookingCard bookingData={bookingData} />
       <Divider />
-      <PaymentsTable paymentsData={paymentsData} bookingData={bookingData} />
+      <PaymentsTable bookingData={bookingData} />
     </>
   );
 };
